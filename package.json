@@ -19,6 +19,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "fmt": "concurrently \"prettier --write \"src/**/*.{json,ts,tsx,html}\"\" \"prettier --write \"electron/**/*.{js,json,ts,tsx,html}\"\"",
     "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -47,6 +48,7 @@
     "electron": "^21.1.1",
     "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
+    "prettier": "^2.7.1",
     "wait-on": "^6.0.1"
   },
   "build": {

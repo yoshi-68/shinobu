@@ -1,7 +1,7 @@
 export declare global {
-  interface Window {
-    myAPI: {
-      counter: (count: number) => number;
-    };
-  }
+    interface Window {
+        myAPI: {
+            counter: (count: number) => number;
+        };
+    }
 }
