@@ -7,6 +7,8 @@ import installExtension, {
     REDUX_DEVTOOLS,
 } from "electron-devtools-installer";
 
+appLogger.transports.file.maxSize = 524288;
+
 const createWindow = () => {
     const isPackaged = app.isPackaged;
     const winParam = {
@@ -21,7 +23,8 @@ const createWindow = () => {
     win.setMenuBarVisibility(false); //画面上部のメニューを削除する
 
     appLogger.info(
-        `ウインドウ生成の情報: { width: ${winParam.width}, height: ${winParam.height}, isPackaged: ${isPackaged} }`
+        "ウインドウ生成の情報:",
+        JSON.stringify(winParam).replace(/\s+/g, "")
     );
 
     const appURL = isPackaged
@@ -48,7 +51,7 @@ app.on("window-all-closed", () => {
 });
 
 process.on("uncaughtException", (error: Error) => {
-    appLogger.error(`予期しないエラーが発生: ${error}`);
+    appLogger.error("予期しないエラーが発生:", error);
     appLogger.error(
         `********** アプリケーション異常終了: version ${app.getVersion()} **********`
     );
