@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
+import logo from "./logo.svg";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -12,7 +13,7 @@ function App() {
                 <button
                     onClick={() => {
                         console.log();
-                        setCount(window.myAPI.counter(count));
+                        setCount(window.electron.counter(count));
                     }}
                 >
                     count
