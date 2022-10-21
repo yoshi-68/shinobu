@@ -1,7 +1,10 @@
-export declare global {
+declare global {
     interface Window {
-        myAPI: {
-            counter: (count: number) => number;
-        };
+        electron: IElectron;
     }
+}
+
+export interface IElectron {
+    logInfo: (...params: any[]) => {};
+    counter: (count: number) => number;
 }

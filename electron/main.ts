@@ -1,11 +1,11 @@
-import { app, BrowserWindow } from "electron";
-import * as path from "path";
-import * as url from "url";
-import appLogger from "electron-log";
+import { BrowserWindow, app, ipcMain } from "electron";
 import installExtension, {
     REACT_DEVELOPER_TOOLS,
     REDUX_DEVTOOLS,
 } from "electron-devtools-installer";
+import appLogger from "electron-log";
+import * as path from "path";
+import * as url from "url";
 
 appLogger.transports.file.maxSize = 524288;
 
@@ -58,10 +58,16 @@ process.on("uncaughtException", (error: Error) => {
     app.quit();
 });
 
+const logInfo = (event: Event, ...params: any[]): void =>
+    appLogger.info(...params);
+
 app.whenReady().then(() => {
     appLogger.info(
         `********** アプリケーション起動: version ${app.getVersion()} **********`
     );
+
+    //ipcイベントリスナー
+    ipcMain.on("log-info", logInfo);
 
     createWindow();
     app.on("activate", () => {

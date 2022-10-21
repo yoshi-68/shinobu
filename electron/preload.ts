@@ -1,7 +1,11 @@
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld("myAPI", {
-    counter: (count: number) => {
+contextBridge.exposeInMainWorld("electron", {
+    logInfo: (...params: any[]): void => {
+        ipcRenderer.send("log-info", ...params);
+    },
+    counter: (count: number): number => {
+        ipcRenderer.send("log-info", "count:", count);
         return count + 1;
     },
 });
