@@ -1,1 +1,1 @@
-export const jsonOneline = (json) => JSON.stringify(json).replace(/\s+/g, "");
+export const toOneline = (json) => JSON.stringify(json).replace(/\s+/g, "");
