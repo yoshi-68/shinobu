@@ -6,7 +6,7 @@
         "outDir": "../build",
         "rootDir": "../",
         "paths": {
-            "types": ["./@types/types.d.ts"]
+            "*": ["./types/*"]
         }
     },
     "include": ["*"]
