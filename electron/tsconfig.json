@@ -4,7 +4,10 @@
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "../build",
-        "rootDir": "../"
+        "rootDir": "../",
+        "paths": {
+            "types": ["./@types/types.d.ts"],
+        },
     },
     "include": ["*"]
 }

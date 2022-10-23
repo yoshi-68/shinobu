@@ -2,16 +2,10 @@ import * as cheerio from "cheerio";
 import * as ElectronLog from "electron-log";
 import * as superagent from "superagent";
 
-import { toOneline } from "./format";
-import { charaDataURL, userAgent } from "../settings";
 
-export interface ICharaData {
-    id: number;
-    name: string;
-    imagePath: string;
-    type: string;
-    position: number;
-}
+import { charaDataURL, userAgent } from "../settings";
+import { toOneline } from "./format";
+import { ICharaData } from "types";
 
 export const getCharaData = (
     appLogger: ElectronLog.ElectronLog,
@@ -33,9 +27,9 @@ export const getCharaData = (
             charaRawData.each((index, element) => {
                 const attr = element["attribs"];
                 const charaData = {
-                    id: attr["value"],
+                    id: Number(attr["value"]),
                     name: attr["data-name"],
-                    imagePath: attr["data-img"],
+                    iconPath: attr["data-img"],
                     type: attr["data-type"],
                     position: attr["data-position"],
                 };
