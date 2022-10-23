@@ -1,14 +1,14 @@
 import * as cheerio from "cheerio";
 import * as ElectronLog from "electron-log";
 import * as superagent from "superagent";
-import { ICharaData } from "types";
+import { charaData } from "types";
 
 import { charaDataURL, userAgent } from "../settings";
 import { toOneline } from "./format";
 
 export const getCharaData = (
     appLogger: ElectronLog.ElectronLog,
-    charactersData: Array<ICharaData>
+    charactersData: Array<charaData>
 ): boolean => {
     appLogger.info("キャラデータの取得を開始");
     superagent

@@ -1,4 +1,4 @@
-export interface ICharaData {
+export interface charaData {
     id: number;
     name: string;
     iconPath: string;
