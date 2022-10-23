@@ -4,7 +4,7 @@ import * as superagent from "superagent";
 import { charaData } from "types";
 
 import { charaDataURL, userAgent } from "../settings";
-import { toOneline } from "./format";
+import { toOneLine } from "./format";
 
 export const getCharaData = (
     appLogger: ElectronLog.ElectronLog,
@@ -35,7 +35,7 @@ export const getCharaData = (
 
                 charactersData.push(charaData);
             });
-            appLogger.info("キャラデータ:", toOneline(charactersData));
+            appLogger.info("キャラデータ:", toOneLine(charactersData));
             appLogger.info("キャラデータの取得を完了");
         });
 
