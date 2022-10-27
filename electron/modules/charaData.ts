@@ -25,7 +25,7 @@ const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
     charaRawData.each((index: number, element: cheerio.Element) => {
         const attr = element["attribs"];
         setCharaData(attr, allCharaData);
-        
+
         const position = attr["data-position"];
         if (position === AVANT_GUARD) {
             setCharaData(attr, avantGuard);
@@ -41,12 +41,7 @@ const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
 
 export const getCharaData = async (): Promise<charactersData> => {
     appLogger.info("キャラデータの取得を開始");
-    let characterData: charactersData = {
-        allCharaData: [],
-        avantGuard: [],
-        middleGuard: [],
-        rearGuard: [],
-    };
+    let characterData: charactersData | undefined = undefined;
     await superagent
         .get(GET_CHARA_DATA_URL)
         .set("User-Agent", USER_AGENT)
