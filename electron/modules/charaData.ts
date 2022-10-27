@@ -3,7 +3,7 @@ import * as appLogger from "electron-log";
 import * as superagent from "superagent";
 import { charaData } from "types";
 
-import { charaDataURL, userAgent } from "../settings";
+import { charaDataURL, userAgent } from "../../settings";
 
 export const getCharaData = async () => {
     appLogger.info("キャラデータの取得を開始");

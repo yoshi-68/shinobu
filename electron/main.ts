@@ -8,9 +8,9 @@ import * as path from "path";
 import { charaData } from "types";
 import * as url from "url";
 
+import { maximumLogFileSize } from "../settings";
 import { getCharaData } from "./modules/charaData";
 import { toOneLine } from "./modules/format";
-import { maximumLogFileSize } from "./settings";
 
 appLogger.transports.file.maxSize = maximumLogFileSize;
 const isPackaged = app.isPackaged;
@@ -73,8 +73,11 @@ app.whenReady().then(async () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
 
-    // DevToolのショートカットキー: Ctrl + Shift + I
-    await installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
+    /*
+     * DevToolのショートカットキー: Ctrl + Shift + I
+     * パッケージングの際はコメントアウトをする
+     */
+    // await installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
 });
 
 //----------------------------------------
