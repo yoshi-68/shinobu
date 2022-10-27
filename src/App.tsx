@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "./App.css";
-import CharaSelect from "./CharaSelect";
+import CharaSelect from "./components/CharaSelect";
 
 function App() {
     return (

@@ -6,8 +6,8 @@ import { characterData, charactersData } from "types";
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../../settings";
 import { GET_CHARA_DATA_URL, USER_AGENT } from "../../settings";
 
-const setCharaData = (attr: cheerio.Element, charaData: any[]) => {
-    charaData.push({
+const setCharaData = (attr: cheerio.Element, array: characterData[]) => {
+    array.push({
         id: Number(attr["value"]),
         name: attr["data-name"],
         iconPath: attr["data-img"],
@@ -24,10 +24,9 @@ const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
 
     charaRawData.each((index: number, element: cheerio.Element) => {
         const attr = element["attribs"];
-        const position = attr["data-position"];
-
         setCharaData(attr, allCharaData);
-
+        
+        const position = attr["data-position"];
         if (position === AVANT_GUARD) {
             setCharaData(attr, avantGuard);
         } else if (position === MIDDLE_GUARD) {

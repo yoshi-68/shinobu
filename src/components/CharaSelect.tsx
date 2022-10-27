@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { characterData, charactersData } from "types";
 
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "./settings";
+import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../settings";
 
 interface Props {}
 
@@ -32,18 +32,18 @@ class CharaSelect extends Component<{}, { charactersData: charactersData }> {
             <>
                 <div id="charaSelect">
                     <div id="charaType">
-                        <input type="button" value="ALL" />
-                        <input type="button" value={AVANT_GUARD} />
-                        <input type="button" value={MIDDLE_GUARD} />
-                        <input type="button" value={REAR_GUARD} />
+                    <label><input type="radio" name="guardType" />全て</label>
+                    <label><input type="radio" name="guardType" />{AVANT_GUARD}</label>
+                    <label><input type="radio" name="guardType" />{MIDDLE_GUARD}</label>
+                    <label><input type="radio" name="guardType" />{REAR_GUARD}</label>
                     </div>
-                    <div id="charaSelect" className="charaSelectBox">
-                        <div id="allChara" className="charaSelect">
+                    <div id="charaSelect" className="chara-select-box">
+                        <div id="allChara" className="chara-select-rows">
                             {this.state.charactersData.allCharaData.map(
                                 (element: characterData) => (
                                     <input
                                         type="image"
-                                        className="charaIcon"
+                                        className="chara-icon"
                                         src={element.iconPath}
                                         alt={element.name}
                                         title={element.name}

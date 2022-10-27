@@ -2,12 +2,7 @@
     text-align: center;
 }
 
-input.charaIcon {
-    width: 3rem;
-    height: 3rem;
-}
-
-.charaSelectBox {
+.chara-select-box {
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
     color: #5989cf;
@@ -16,7 +11,7 @@ input.charaIcon {
     border-radius: 1.5rem;
 }
 
-.charaSelect {
+.chara-select-rows {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 0.3rem;
@@ -26,32 +21,23 @@ input.charaIcon {
     overflow-y: scroll;
 }
 
-.charaSelect::-webkit-scrollbar-track {
+.chara-select-rows::-webkit-scrollbar-track {
     background: #d1e7fb;
 }
 
-.charaSelect::-webkit-scrollbar-thumb {
+.chara-select-rows::-webkit-scrollbar-thumb {
     background: #afd5ff;
     border-radius: 2rem;
     scrollbar-width: 0.5rem;
 }
 
-.charaSelect::-webkit-scrollbar {
+.chara-select-rows::-webkit-scrollbar {
     width: 0.5rem;
     height: 1rem;
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
+input.chara-icon {
+    padding: 0.2rem;
+    width: 3rem;
+    height: 3rem;
 }
