@@ -5,14 +5,14 @@ import installExtension, {
 } from "electron-devtools-installer";
 import * as appLogger from "electron-log";
 import * as path from "path";
-import { charaData } from "types";
+import { charactersData } from "types";
 import * as url from "url";
 
-import { maximumLogFileSize } from "../settings";
+import { MAXIMUM_LOG_FILE_SIZE } from "../settings";
 import { getCharaData } from "./modules/charaData";
 import { toOneLine } from "./modules/format";
 
-appLogger.transports.file.maxSize = maximumLogFileSize;
+appLogger.transports.file.maxSize = MAXIMUM_LOG_FILE_SIZE;
 const isPackaged = app.isPackaged;
 
 const createWindow = () => {
@@ -84,7 +84,10 @@ app.whenReady().then(async () => {
 // IPC通信
 //----------------------------------------
 ipcMain.on("log-info", logInfo);
-ipcMain.handle("get-chara-data", async (event: Event): Promise<charaData[]> => {
-    const allCharasData = await getCharaData();
-    return allCharasData;
-});
+ipcMain.handle(
+    "get-chara-data",
+    async (event: Event): Promise<charactersData> => {
+        const charaData = await getCharaData();
+        return charaData;
+    }
+);

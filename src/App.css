@@ -7,8 +7,38 @@ input.charaIcon {
     height: 3rem;
 }
 
-#allChara {
-    padding: 1rem;
+.charaSelectBox {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: #5989cf;
+    background: #d1e7fb;
+    border-bottom: solid 6px #b5cce2;
+    border-radius: 1.5rem;
+}
+
+.charaSelect {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.3rem;
+    padding-right: 0.2rem;
+    text-align: left;
+    height: 17rem;
+    overflow-y: scroll;
+}
+
+.charaSelect::-webkit-scrollbar-track {
+    background: #d1e7fb;
+}
+
+.charaSelect::-webkit-scrollbar-thumb {
+    background: #afd5ff;
+    border-radius: 2rem;
+    scrollbar-width: 0.5rem;
+}
+
+.charaSelect::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 1rem;
 }
 
 .App-header {

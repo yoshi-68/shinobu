@@ -1,17 +1,56 @@
 import * as cheerio from "cheerio";
 import * as appLogger from "electron-log";
 import * as superagent from "superagent";
-import { charaData } from "types";
+import { characterData, charactersData } from "types";
 
-import { charaDataURL, userAgent } from "../../settings";
+import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../../settings";
+import { GET_CHARA_DATA_URL, USER_AGENT } from "../../settings";
 
-export const getCharaData = async () => {
+const setCharaData = (attr: cheerio.Element, charaData: any[]) => {
+    charaData.push({
+        id: Number(attr["value"]),
+        name: attr["data-name"],
+        iconPath: attr["data-img"],
+        type: attr["data-type"],
+        position: attr["data-position"],
+    });
+};
+
+const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
+    const allCharaData: characterData[] = [];
+    const avantGuard: characterData[] = [];
+    const middleGuard: characterData[] = [];
+    const rearGuard: characterData[] = [];
+
+    charaRawData.each((index: number, element: cheerio.Element) => {
+        const attr = element["attribs"];
+        const position = attr["data-position"];
+
+        setCharaData(attr, allCharaData);
+
+        if (position === AVANT_GUARD) {
+            setCharaData(attr, avantGuard);
+        } else if (position === MIDDLE_GUARD) {
+            setCharaData(attr, middleGuard);
+        } else if (position === REAR_GUARD) {
+            setCharaData(attr, rearGuard);
+        }
+    });
+
+    return { allCharaData, avantGuard, middleGuard, rearGuard };
+};
+
+export const getCharaData = async (): Promise<charactersData> => {
     appLogger.info("キャラデータの取得を開始");
-    const characterData: charaData[] = [];
-
+    let characterData: charactersData = {
+        allCharaData: [],
+        avantGuard: [],
+        middleGuard: [],
+        rearGuard: [],
+    };
     await superagent
-        .get(charaDataURL)
-        .set("User-Agent", userAgent)
+        .get(GET_CHARA_DATA_URL)
+        .set("User-Agent", USER_AGENT)
         .then((res: superagent.Response) => {
             if (!res.ok) {
                 appLogger.error(
@@ -24,18 +63,7 @@ export const getCharaData = async () => {
 
             const $ = cheerio.load(res.text);
             const charaRawData = $("#char_selected").children("input");
-            charaRawData.each((index, element) => {
-                const attr = element["attribs"];
-                characterData.push({
-                    id: Number(attr["value"]),
-                    name: attr["data-name"],
-                    iconPath: attr["data-img"],
-                    type: attr["data-type"],
-                    position: attr["data-position"],
-                });
-            });
-
-            return characterData;
+            characterData = createCharaData(charaRawData);
         })
         .catch((error) => {
             appLogger.error("エラーが発生:", error);
