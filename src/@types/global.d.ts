@@ -1,3 +1,5 @@
+import { charaData } from "types";
+
 declare global {
     interface Window {
         electron: IElectron;
@@ -5,6 +7,7 @@ declare global {
 }
 
 export interface IElectron {
-    logInfo: (...params: any[]) => {};
+    logInfo: (...params: any[]) => void;
+    getCharaData: () => Promise<charaData[]>;
     counter: (count: number) => number;
 }

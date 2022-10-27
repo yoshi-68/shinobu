@@ -1,23 +1,23 @@
-import { BrowserWindow, app, ipcMain } from "electron";
+import { BrowserWindow, app, ipcMain, session } from "electron";
 import installExtension, {
     REACT_DEVELOPER_TOOLS,
     REDUX_DEVTOOLS,
 } from "electron-devtools-installer";
 import * as appLogger from "electron-log";
 import * as path from "path";
+import { charaData } from "types";
 import * as url from "url";
 
 import { getCharaData } from "./modules/charaData";
-import { toOneline } from "./modules/format";
+import { toOneLine } from "./modules/format";
 import { maximumLogFileSize } from "./settings";
 
 appLogger.transports.file.maxSize = maximumLogFileSize;
 const isPackaged = app.isPackaged;
-const charactersData = new Array();
 
 const createWindow = () => {
     const winParam = {
-        width: 1000,
+        width: 800,
         height: 1000,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
@@ -27,7 +27,7 @@ const createWindow = () => {
     const win = new BrowserWindow(winParam);
     win.setMenuBarVisibility(false); //画面上部のメニューを削除する
 
-    appLogger.info("ウインドウ生成の情報:", toOneline(winParam));
+    appLogger.info("ウインドウ生成の情報:", toOneLine(winParam));
 
     const appURL = isPackaged
         ? url.format({
@@ -63,30 +63,25 @@ process.on("uncaughtException", (error: Error) => {
 const logInfo = (event: Event, ...params: any[]): void =>
     appLogger.info(...params);
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
     appLogger.info(
         `********** アプリケーション起動: version ${app.getVersion()} **********`
     );
-
-    //ipcイベントリスナー
-    ipcMain.on("log-info", logInfo);
 
     createWindow();
     app.on("activate", () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
 
-    getCharaData(appLogger, charactersData);
+    // DevToolのショートカットキー: Ctrl + Shift + I
+    await installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
+});
 
-    /*
-     ** React Developer Toolsのインストール
-     **
-     ** パッケージングする際はコメントアウトすること
-     ** exeファイルがエラーになり実行できなくなる
-     */
-    // if (!isPackaged) {
-    //     installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
-    //         .then((name) => console.log(name))
-    //         .catch((err) => console.log(err));
-    // }
+//----------------------------------------
+// IPC通信
+//----------------------------------------
+ipcMain.on("log-info", logInfo);
+ipcMain.handle("get-chara-data", async (event: Event): Promise<charaData[]> => {
+    const allCharasData = await getCharaData();
+    return allCharasData;
 });
