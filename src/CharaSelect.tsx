@@ -29,7 +29,6 @@ class CharaSelect extends Component<{}, { allChara: charaData[] }> {
     }
 
     render() {
-        console.info("typeof:", this.state.allChara);
         return (
             <>
                 <div id="charaSelect">
