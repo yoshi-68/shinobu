@@ -39,7 +39,9 @@ input[type="radio"] {
     background: white;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    border-top: 8px solid var(--select-chara-type-active);
+    border-top: 1rem solid var(--select-chara-type-active);
+    border-bottom: 1rem solid var(--select-chara-type-active);
+    border-radius: 0.8rem;
 }
 .tab_panel {
     width: 100%;
@@ -83,7 +85,7 @@ input[type="radio"] {
 }
 
 .chara-select-rows {
-    padding: 0.1rem 0rem;
+    padding: 0rem 0rem;
     text-align: left;
     height: 17rem;
     overflow-y: scroll;
