@@ -1,5 +1,5 @@
-import "./css/App.css";
 import CharaSelect from "./components/CharaSelect";
+import "./css/App.css";
 
 function App() {
     return (

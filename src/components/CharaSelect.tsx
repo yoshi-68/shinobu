@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { characterData, charactersData } from "types";
 
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../settings";
 import "../css/CharaSelect.css";
+import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../settings";
 
 interface Props {}
 
@@ -11,8 +11,8 @@ const showCharaList = (charaData: characterData[], key: string) => {
         <span>
             {charaData.map((element: characterData) => (
                 <input
-                    key={"key" + element.id}
                     type="image"
+                    key={"key" + element.id}
                     className="chara-icon"
                     src={element.iconPath}
                     alt={element.name}
