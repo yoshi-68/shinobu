@@ -6,7 +6,11 @@ import { characterData, charactersData } from "types";
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../../settings";
 import { GET_CHARA_DATA_URL, USER_AGENT } from "../../settings";
 
-const setCharaData = (attr: cheerio.Element, array: characterData[], orderFormation:number) => {
+const setCharaData = (
+    attr: cheerio.Element,
+    array: characterData[],
+    orderFormation: number
+) => {
     array.push({
         id: Number(attr["value"]),
         name: attr["data-name"],

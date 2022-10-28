@@ -2,32 +2,104 @@
     text-align: center;
 }
 
-.chara-select-box {
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
-    color: #5989cf;
-    background: #d1e7fb;
-    border-bottom: solid 6px #b5cce2;
-    border-radius: 1.5rem;
+:root {
+    --select-chara-type-active: #e1f9f9;
+    --select-chara-type-non-active: #81b5b8;
+}
+
+.tab_wrap {
+    width: auto;
+    margin: 0rem 2rem;
+}
+input[type="radio"] {
+    display: none;
+}
+.tab_area {
+    font-size: 0;
+    padding: 0 55px;
+    white-space: nowrap;
+}
+.tab_area label {
+    width: 6rem;
+    display: inline-block;
+    padding: 14px 0 12px;
+    color: white;
+    background: var(--select-chara-type-non-active);
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: ease 0.2s opacity;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    vertical-align: bottom;
+    transition: ease 0.2s;
+    margin: 10px 5px 0;
+}
+
+.tab_area label:hover {
+    opacity: 0.5;
+}
+.panel_area {
+    background: white;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top: 8px solid var(--select-chara-type-active);
+}
+.tab_panel {
+    width: 100%;
+    padding: 1rem 0;
+    display: none;
+    background: var(--select-chara-type-active);
+}
+.tab_panel input {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+#tab1:checked ~ .tab_area .tab1_label {
+    background: var(--select-chara-type-active);
+    color: black;
+}
+#tab1:checked ~ .panel_area #panel1 {
+    display: block;
+}
+#tab2:checked ~ .tab_area .tab2_label {
+    background: var(--select-chara-type-active);
+    color: black;
+}
+#tab2:checked ~ .panel_area #panel2 {
+    display: block;
+}
+#tab3:checked ~ .tab_area .tab3_label {
+    background: var(--select-chara-type-active);
+    color: black;
+}
+#tab3:checked ~ .panel_area #panel3 {
+    display: block;
+}
+#tab4:checked ~ .tab_area .tab4_label {
+    background: var(--select-chara-type-active);
+    color: black;
+}
+#tab4:checked ~ .panel_area #panel4 {
+    display: block;
 }
 
 .chara-select-rows {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.3rem;
-    padding-right: 0.2rem;
+    padding: 0.1rem 0rem;
     text-align: left;
     height: 17rem;
     overflow-y: scroll;
 }
 
 .chara-select-rows::-webkit-scrollbar-track {
-    background: #d1e7fb;
+    background: var(--select-chara-type-active);
 }
 
 .chara-select-rows::-webkit-scrollbar-thumb {
-    background: #afd5ff;
-    border-radius: 2rem;
+    background: var(--select-chara-type-non-active);
+    border-radius: 1rem;
     scrollbar-width: 0.5rem;
 }
 
@@ -37,6 +109,7 @@
 }
 
 input.chara-icon {
+    opacity: 0.8;
     padding: 0.2rem;
     width: 3rem;
     height: 3rem;
