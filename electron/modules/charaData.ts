@@ -30,12 +30,12 @@ const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
         const attr = element["attribs"];
         setCharaData(attr, allCharaData, ++index);
 
-        const position = attr["data-position"];
-        if (position === AVANT_GUARD) {
+        const guardType = attr["data-position"];
+        if (guardType === AVANT_GUARD) {
             setCharaData(attr, avantGuard, ++index);
-        } else if (position === MIDDLE_GUARD) {
+        } else if (guardType === MIDDLE_GUARD) {
             setCharaData(attr, middleGuard, ++index);
-        } else if (position === REAR_GUARD) {
+        } else if (guardType === REAR_GUARD) {
             setCharaData(attr, rearGuard, ++index);
         }
     });
