@@ -24,7 +24,6 @@ const showCharaList = (charaData: characterData[], key: string) => {
 };
 
 class CharaSelect extends Component<{}, { charactersData: charactersData }> {
-    /* @ts-ignore */
     constructor(props: Props) {
         super(props);
         this.state = {
