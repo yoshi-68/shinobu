@@ -34,7 +34,6 @@ class CharaSelect extends Component<{}, { charactersData: charactersData }> {
                 rearGuard: [],
             },
         };
-        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -43,10 +42,6 @@ class CharaSelect extends Component<{}, { charactersData: charactersData }> {
                 charactersData: res,
             });
         });
-    }
-
-    handleClick() {
-        console.info("推されました");
     }
 
     render() {
