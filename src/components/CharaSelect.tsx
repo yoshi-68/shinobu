@@ -2,6 +2,7 @@ import { Component } from "react";
 import { characterData, charactersData } from "types";
 
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../settings";
+import "../css/CharaSelect.css";
 
 interface Props {}
 

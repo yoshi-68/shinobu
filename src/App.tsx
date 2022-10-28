@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./App.css";
+import "./css/App.css";
 import CharaSelect from "./components/CharaSelect";
 
 function App() {
