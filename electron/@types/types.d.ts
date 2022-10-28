@@ -2,8 +2,8 @@ export type characterData = {
     id: number;
     name: string;
     iconPath: string;
-    type: string;
-    position: number;
+    guardType: string;
+    orderFormation: number;
 };
 
 export type charactersData = {

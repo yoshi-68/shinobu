@@ -6,13 +6,13 @@ import { characterData, charactersData } from "types";
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../../settings";
 import { GET_CHARA_DATA_URL, USER_AGENT } from "../../settings";
 
-const setCharaData = (attr: cheerio.Element, array: characterData[]) => {
+const setCharaData = (attr: cheerio.Element, array: characterData[], orderFormation:number) => {
     array.push({
         id: Number(attr["value"]),
         name: attr["data-name"],
         iconPath: attr["data-img"],
-        type: attr["data-type"],
-        position: attr["data-position"],
+        guardType: attr["data-position"],
+        orderFormation,
     });
 };
 
@@ -24,15 +24,15 @@ const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
 
     charaRawData.each((index: number, element: cheerio.Element) => {
         const attr = element["attribs"];
-        setCharaData(attr, allCharaData);
+        setCharaData(attr, allCharaData, ++index);
 
         const position = attr["data-position"];
         if (position === AVANT_GUARD) {
-            setCharaData(attr, avantGuard);
+            setCharaData(attr, avantGuard, ++index);
         } else if (position === MIDDLE_GUARD) {
-            setCharaData(attr, middleGuard);
+            setCharaData(attr, middleGuard, ++index);
         } else if (position === REAR_GUARD) {
-            setCharaData(attr, rearGuard);
+            setCharaData(attr, rearGuard, ++index);
         }
     });
 
