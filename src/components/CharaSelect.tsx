@@ -1,18 +1,18 @@
 import { Component } from "react";
-import { characterData, charactersData } from "types";
+import { CharacterData, CharactersData } from "types";
 
 import "../css/CharaSelect.css";
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../settings";
 
 interface Props {}
 
-const showCharaList = (charaData: characterData[], key: string) => {
+const showCharaList = (charaData: CharacterData[], key: string) => {
     return (
         <span>
-            {charaData.map((element: characterData) => (
+            {charaData.map(element => (
                 <input
                     type="image"
-                    key={"key" + element.id}
+                    key={key + element.id}
                     className="chara-icon"
                     src={element.iconPath}
                     alt={element.name}
@@ -23,7 +23,7 @@ const showCharaList = (charaData: characterData[], key: string) => {
     );
 };
 
-class CharaSelect extends Component<{}, { charactersData: charactersData }> {
+class CharaSelect extends Component<{}, { charactersData: CharactersData }> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -37,7 +37,7 @@ class CharaSelect extends Component<{}, { charactersData: charactersData }> {
     }
 
     componentDidMount() {
-        window.electron.getCharaData().then((res: charactersData) => {
+        window.electron.getCharaData().then((res: CharactersData) => {
             this.setState({
                 charactersData: res,
             });

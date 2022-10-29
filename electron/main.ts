@@ -5,7 +5,7 @@ import installExtension, {
 } from "electron-devtools-installer";
 import * as appLogger from "electron-log";
 import * as path from "path";
-import { charactersData } from "types";
+import { CharactersData } from "types";
 import * as url from "url";
 
 import { MAXIMUM_LOG_FILE_SIZE } from "../settings";
@@ -88,7 +88,7 @@ app.whenReady().then(async () => {
 ipcMain.on("log-info", logInfo);
 ipcMain.handle(
     "get-chara-data",
-    async (event: Event): Promise<charactersData> => {
+    async (event: Event): Promise<CharactersData> => {
         const charaData = await getCharaData();
         return charaData;
     }

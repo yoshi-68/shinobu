@@ -1,4 +1,4 @@
-export type characterData = {
+export type CharacterData = {
     id: number;
     name: string;
     iconPath: string;
@@ -6,9 +6,9 @@ export type characterData = {
     orderFormation: number;
 };
 
-export type charactersData = {
-    allCharaData: characterData[];
-    avantGuard: characterData[];
-    middleGuard: characterData[];
-    rearGuard: characterData[];
+export type CharactersData = {
+    allCharaData: CharacterData[];
+    avantGuard: CharacterData[];
+    middleGuard: CharacterData[];
+    rearGuard: CharacterData[];
 };

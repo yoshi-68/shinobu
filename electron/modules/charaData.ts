@@ -1,14 +1,14 @@
 import * as cheerio from "cheerio";
 import * as appLogger from "electron-log";
 import * as superagent from "superagent";
-import { characterData, charactersData } from "types";
+import { CharacterData, CharactersData } from "types";
 
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../../settings";
 import { GET_CHARA_DATA_URL, USER_AGENT } from "../../settings";
 
 const setCharaData = (
     attr: cheerio.Element,
-    array: characterData[],
+    array: CharacterData[],
     orderFormation: number
 ) => {
     array.push({
@@ -20,11 +20,11 @@ const setCharaData = (
     });
 };
 
-const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
-    const allCharaData: characterData[] = [];
-    const avantGuard: characterData[] = [];
-    const middleGuard: characterData[] = [];
-    const rearGuard: characterData[] = [];
+const createCharaData = (charaRawData: cheerio.Cheerio): CharactersData => {
+    const allCharaData: CharacterData[] = [];
+    const avantGuard: CharacterData[] = [];
+    const middleGuard: CharacterData[] = [];
+    const rearGuard: CharacterData[] = [];
 
     charaRawData.each((index: number, element: cheerio.Element) => {
         const attr = element["attribs"];
@@ -43,9 +43,9 @@ const createCharaData = (charaRawData: cheerio.Cheerio): charactersData => {
     return { allCharaData, avantGuard, middleGuard, rearGuard };
 };
 
-export const getCharaData = async (): Promise<charactersData> => {
+export const getCharaData = async (): Promise<CharactersData> => {
     appLogger.info("キャラデータの取得を開始");
-    let characterData: charactersData | undefined = undefined;
+    let charactersData: CharactersData;
     await superagent
         .get(GET_CHARA_DATA_URL)
         .set("User-Agent", USER_AGENT)
@@ -61,12 +61,12 @@ export const getCharaData = async (): Promise<charactersData> => {
 
             const $ = cheerio.load(res.text);
             const charaRawData = $("#char_selected").children("input");
-            characterData = createCharaData(charaRawData);
+            charactersData = createCharaData(charaRawData);
         })
         .catch((error) => {
             appLogger.error("エラーが発生:", error);
         });
     appLogger.info("キャラデータの取得を完了");
 
-    return characterData;
+    return charactersData;
 };
