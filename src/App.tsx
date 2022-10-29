@@ -1,6 +1,6 @@
-import CharaSelect from "./components/CharaSelect";
-import CharaSearch from "./components/CharaSearch";
-import "./css/App.css";
+import CharaSearch from './components/CharaSearch';
+import CharaSelect from './components/CharaSelect';
+import './css/App.css';
 
 function App() {
     return (

@@ -1,4 +1,4 @@
-import { CharactersData } from "types";
+import { CharactersData } from 'types';
 
 declare global {
     interface Window {

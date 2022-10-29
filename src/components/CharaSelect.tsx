@@ -1,15 +1,15 @@
-import { Component } from "react";
-import { CharacterData, CharactersData } from "types";
+import { Component } from 'react';
+import { CharacterData, CharactersData } from 'types';
 
-import "../css/CharaSelect.css";
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from "../settings";
+import '../css/CharaSelect.css';
+import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../settings';
 
 interface Props {}
 
 const showCharaList = (charaData: CharacterData[], key: string) => {
     return (
         <span>
-            {charaData.map(element => (
+            {charaData.map((element) => (
                 <input
                     type="image"
                     key={key + element.id}
@@ -78,7 +78,7 @@ class CharaSelect extends Component<{}, { charactersData: CharactersData }> {
                         >
                             {showCharaList(
                                 this.state.charactersData.allCharaData,
-                                "allGuard_"
+                                'allGuard_'
                             )}
                         </div>
                         <div
@@ -87,7 +87,7 @@ class CharaSelect extends Component<{}, { charactersData: CharactersData }> {
                         >
                             {showCharaList(
                                 this.state.charactersData.avantGuard,
-                                "avantGuard_"
+                                'avantGuard_'
                             )}
                         </div>
                         <div
@@ -96,7 +96,7 @@ class CharaSelect extends Component<{}, { charactersData: CharactersData }> {
                         >
                             {showCharaList(
                                 this.state.charactersData.middleGuard,
-                                "middleGuard_"
+                                'middleGuard_'
                             )}
                         </div>
                         <div
@@ -105,7 +105,7 @@ class CharaSelect extends Component<{}, { charactersData: CharactersData }> {
                         >
                             {showCharaList(
                                 this.state.charactersData.rearGuard,
-                                "rearGuard_"
+                                'rearGuard_'
                             )}
                         </div>
                     </div>

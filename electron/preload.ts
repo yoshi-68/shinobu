@@ -1,14 +1,14 @@
-import { contextBridge, ipcRenderer } from "electron";
-import { CharactersData } from "types";
+import { contextBridge, ipcRenderer } from 'electron';
+import { CharactersData } from 'types';
 
-contextBridge.exposeInMainWorld("electron", {
+contextBridge.exposeInMainWorld('electron', {
     logInfo: (...params: any[]): void => {
-        ipcRenderer.send("log-info", ...params);
+        ipcRenderer.send('log-info', ...params);
     },
     getCharaData: async (): Promise<CharactersData> =>
-        await ipcRenderer.invoke("get-chara-data"),
+        await ipcRenderer.invoke('get-chara-data'),
     counter: (count: number): number => {
-        ipcRenderer.send("log-info", "count:", count);
+        ipcRenderer.send('log-info', 'count:', count);
         return count + 1;
     },
 });
