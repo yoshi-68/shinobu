@@ -4,8 +4,6 @@ import { CharacterData, CharactersData } from 'types';
 import '../css/CharaSelect.css';
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../settings';
 
-interface Props {}
-
 const showCharaList = (charaData: CharacterData[], key: string) => {
     return (
         <span>
