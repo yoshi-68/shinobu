@@ -6,7 +6,7 @@ import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../settings';
 
 const showCharaList = (charaData: CharacterData[], key: string) => {
     return (
-        <span>
+        <div id={key + 'characters'}>
             {charaData.map((element) => (
                 <input
                     type="image"
@@ -17,7 +17,7 @@ const showCharaList = (charaData: CharacterData[], key: string) => {
                     title={element.name}
                 />
             ))}
-        </span>
+        </div>
     );
 };
 
@@ -60,19 +60,19 @@ const CharaSelect = () => {
                     <div id="panel1" className="tab_panel chara-select-rows">
                         {showCharaList(
                             charactersData.allCharaData,
-                            'allGuard_'
+                            'all_guard_'
                         )}
                     </div>
                     <div id="panel2" className="tab_panel chara-select-rows">
                         {showCharaList(
                             charactersData.avantGuard,
-                            'avantGuard_'
+                            'avant_guard_'
                         )}
                     </div>
                     <div id="panel3" className="tab_panel chara-select-rows">
                         {showCharaList(
                             charactersData.middleGuard,
-                            'middleGuard_'
+                            'middle_guard_'
                         )}
                     </div>
                     <div id="panel4" className="tab_panel chara-select-rows">
