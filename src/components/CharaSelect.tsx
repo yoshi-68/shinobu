@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import { CharacterData, CharactersData } from 'types';
 
 import '../css/CharaSelect.css';
@@ -23,96 +23,67 @@ const showCharaList = (charaData: CharacterData[], key: string) => {
     );
 };
 
-class CharaSelect extends Component<{}, { charactersData: CharactersData }> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            charactersData: {
-                allCharaData: [],
-                avantGuard: [],
-                middleGuard: [],
-                rearGuard: [],
-            },
-        };
-    }
+const CharaSelect = () => {
+    const [charactersData, setCharactersData] = useState({
+        allCharaData: [] as CharacterData[],
+        avantGuard: [] as CharacterData[],
+        middleGuard: [] as CharacterData[],
+        rearGuard: [] as CharacterData[],
+    });
 
-    componentDidMount() {
+    useEffect(() => {
         window.electron.getCharaData().then((res: CharactersData) => {
-            this.setState({
-                charactersData: res,
-            });
+            setCharactersData(res);
         });
-    }
+    }, []);
 
-    render() {
-        return (
-            <>
-                <div className="tab_wrap">
-                    <input
-                        id="tab1"
-                        type="radio"
-                        name="tab_btn"
-                        defaultChecked
-                    />
-                    <input id="tab2" type="radio" name="tab_btn" />
-                    <input id="tab3" type="radio" name="tab_btn" />
-                    <input id="tab4" type="radio" name="tab_btn" />
-                    <div className="tab_area">
-                        <label className="tab1_label" htmlFor="tab1">
-                            全て
-                        </label>
-                        <label className="tab2_label" htmlFor="tab2">
-                            {AVANT_GUARD}
-                        </label>
-                        <label className="tab3_label" htmlFor="tab3">
-                            {MIDDLE_GUARD}
-                        </label>
-                        <label className="tab4_label" htmlFor="tab4">
-                            {REAR_GUARD}
-                        </label>
+    return (
+        <>
+            <div className="tab_wrap">
+                <input id="tab1" type="radio" name="tab_btn" defaultChecked />
+                <input id="tab2" type="radio" name="tab_btn" />
+                <input id="tab3" type="radio" name="tab_btn" />
+                <input id="tab4" type="radio" name="tab_btn" />
+                <div className="tab_area">
+                    <label className="tab1_label" htmlFor="tab1">
+                        全て
+                    </label>
+                    <label className="tab2_label" htmlFor="tab2">
+                        {AVANT_GUARD}
+                    </label>
+                    <label className="tab3_label" htmlFor="tab3">
+                        {MIDDLE_GUARD}
+                    </label>
+                    <label className="tab4_label" htmlFor="tab4">
+                        {REAR_GUARD}
+                    </label>
+                </div>
+                <div className="panel_area">
+                    <div id="panel1" className="tab_panel chara-select-rows">
+                        {showCharaList(
+                            charactersData.allCharaData,
+                            'allGuard_'
+                        )}
                     </div>
-                    <div className="panel_area">
-                        <div
-                            id="panel1"
-                            className="tab_panel chara-select-rows"
-                        >
-                            {showCharaList(
-                                this.state.charactersData.allCharaData,
-                                'allGuard_'
-                            )}
-                        </div>
-                        <div
-                            id="panel2"
-                            className="tab_panel chara-select-rows"
-                        >
-                            {showCharaList(
-                                this.state.charactersData.avantGuard,
-                                'avantGuard_'
-                            )}
-                        </div>
-                        <div
-                            id="panel3"
-                            className="tab_panel chara-select-rows"
-                        >
-                            {showCharaList(
-                                this.state.charactersData.middleGuard,
-                                'middleGuard_'
-                            )}
-                        </div>
-                        <div
-                            id="panel4"
-                            className="tab_panel chara-select-rows"
-                        >
-                            {showCharaList(
-                                this.state.charactersData.rearGuard,
-                                'rearGuard_'
-                            )}
-                        </div>
+                    <div id="panel2" className="tab_panel chara-select-rows">
+                        {showCharaList(
+                            charactersData.avantGuard,
+                            'avantGuard_'
+                        )}
+                    </div>
+                    <div id="panel3" className="tab_panel chara-select-rows">
+                        {showCharaList(
+                            charactersData.middleGuard,
+                            'middleGuard_'
+                        )}
+                    </div>
+                    <div id="panel4" className="tab_panel chara-select-rows">
+                        {showCharaList(charactersData.rearGuard, 'rearGuard_')}
                     </div>
                 </div>
-            </>
-        );
-    }
-}
+            </div>
+        </>
+    );
+};
 
 export default CharaSelect;
