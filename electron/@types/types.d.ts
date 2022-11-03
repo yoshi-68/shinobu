@@ -11,4 +11,4 @@ export type CharactersData = {
     avantGuard: CharacterData[];
     middleGuard: CharacterData[];
     rearGuard: CharacterData[];
-};
+} | undefined;
