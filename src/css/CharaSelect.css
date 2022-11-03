@@ -3,19 +3,19 @@
     --select-chara-type-non-active: #81b5b8;
 }
 
-.tab_wrap {
+.chara-select-tab-wrap {
     width: auto;
     margin: 0rem 2rem;
 }
 input[type='radio'] {
     display: none;
 }
-.tab_area {
+.chara-select-tab-area {
     font-size: 0;
     padding: 0 55px;
     white-space: nowrap;
 }
-.tab_area label {
+.chara-select-tab-area label {
     width: 6rem;
     display: inline-block;
     padding: 14px 0 12px;
@@ -32,10 +32,10 @@ input[type='radio'] {
     margin: 10px 5px 0;
 }
 
-.tab_area label:hover {
+.chara-select-tab-area label:hover {
     opacity: 0.5;
 }
-.panel_area {
+.chara-select-panel-area {
     background: white;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -43,44 +43,47 @@ input[type='radio'] {
     border-bottom: 1rem solid var(--select-chara-type-active);
     border-radius: 0.8rem;
 }
-.tab_panel {
+.chara-select-tab-panel {
     width: 100%;
     padding: 1rem 0;
     display: none;
     background: var(--select-chara-type-active);
 }
-.tab_panel input {
+.chara-select-tab-panel input {
     font-size: 14px;
     letter-spacing: 1px;
     text-align: left;
 }
 
-#tab1:checked ~ .tab_area .tab1_label {
+#chara_select_tab1:checked ~ .chara-select-tab-area .chara-select-tab1-label {
     background: var(--select-chara-type-active);
     color: black;
 }
-#tab1:checked ~ .panel_area #panel1 {
+#chara_select_tab1:checked ~ .chara-select-panel-area #chara_select_tab1 {
     display: block;
 }
-#tab2:checked ~ .tab_area .tab2_label {
+
+#chara_select_tab2:checked ~ .chara-select-tab-area .chara-select-tab2-label {
     background: var(--select-chara-type-active);
     color: black;
 }
-#tab2:checked ~ .panel_area #panel2 {
+#chara_select_tab2:checked ~ .chara-select-panel-area #chara_select_tab2 {
     display: block;
 }
-#tab3:checked ~ .tab_area .tab3_label {
+
+#chara_select_tab3:checked ~ .chara-select-tab-area .chara-select-tab3-label {
     background: var(--select-chara-type-active);
     color: black;
 }
-#tab3:checked ~ .panel_area #panel3 {
+#chara_select_tab3:checked ~ .chara-select-panel-area #chara_select_tab3 {
     display: block;
 }
-#tab4:checked ~ .tab_area .tab4_label {
+
+#chara_select_tab4:checked ~ .chara-select-tab-area .chara-select-tab4-label {
     background: var(--select-chara-type-active);
     color: black;
 }
-#tab4:checked ~ .panel_area #panel4 {
+#chara_select_tab4:checked ~ .chara-select-panel-area #chara_select_tab4 {
     display: block;
 }
 

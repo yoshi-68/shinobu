@@ -4,10 +4,10 @@ import { CharacterData, CharactersData } from 'types';
 import '../css/CharaSelect.css';
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../settings';
 
-const showCharaList = (charaData: CharacterData[], key: string) => {
+const showCharaList = (key: string, charaData?: CharacterData[]) => {
     return (
         <div id={key + 'characters'}>
-            {charaData.map((element) => (
+            {charaData?.map((element) => (
                 <input
                     type="image"
                     key={key + element.id}
@@ -22,61 +22,56 @@ const showCharaList = (charaData: CharacterData[], key: string) => {
 };
 
 const CharaSelect = () => {
-    const [charactersData, setCharactersData] = useState({
-        allCharaData: [] as CharacterData[],
-        avantGuard: [] as CharacterData[],
-        middleGuard: [] as CharacterData[],
-        rearGuard: [] as CharacterData[],
-    });
+    const [charactersData, setCharactersData] = useState({} as CharactersData);
 
     useEffect(() => {
-        window.electron.getCharaData().then((res: CharactersData) => {
+        window.electron.getCharaData().then((res?: CharactersData) => {
             setCharactersData(res);
         });
     }, []);
 
     return (
         <>
-            <div className="tab_wrap">
-                <input id="tab1" type="radio" name="tab_btn" defaultChecked />
-                <input id="tab2" type="radio" name="tab_btn" />
-                <input id="tab3" type="radio" name="tab_btn" />
-                <input id="tab4" type="radio" name="tab_btn" />
-                <div className="tab_area">
-                    <label className="tab1_label" htmlFor="tab1">
+            <div className="chara-select-tab-wrap">
+                <input id="chara_select_tab1" type="radio" name="tab_btn" defaultChecked />
+                <input id="chara_select_tab2" type="radio" name="tab_btn" />
+                <input id="chara_select_tab3" type="radio" name="tab_btn" />
+                <input id="chara_select_tab4" type="radio" name="tab_btn" />
+                <div className="chara-select-tab-area">
+                    <label className="chara-select-tab1-label" htmlFor="chara_select_tab1">
                         全て
                     </label>
-                    <label className="tab2_label" htmlFor="tab2">
+                    <label className="chara-select-tab2-label" htmlFor="chara_select_tab2">
                         {AVANT_GUARD}
                     </label>
-                    <label className="tab3_label" htmlFor="tab3">
+                    <label className="chara-select-tab3-label" htmlFor="chara_select_tab3">
                         {MIDDLE_GUARD}
                     </label>
-                    <label className="tab4_label" htmlFor="tab4">
+                    <label className="chara-select-tab4-label" htmlFor="chara_select_tab4">
                         {REAR_GUARD}
                     </label>
                 </div>
-                <div className="panel_area">
-                    <div id="panel1" className="tab_panel chara-select-rows">
+                <div className="chara-select-panel-area">
+                    <div id="chara_select_tab1" className="chara-select-tab-panel chara-select-rows">
                         {showCharaList(
-                            charactersData.allCharaData,
-                            'all_guard_'
+                            'all_guard_',
+                            charactersData?.allCharaData
                         )}
                     </div>
-                    <div id="panel2" className="tab_panel chara-select-rows">
+                    <div id="chara_select_tab2" className="chara-select-tab-panel chara-select-rows">
                         {showCharaList(
-                            charactersData.avantGuard,
-                            'avant_guard_'
+                            'avant_guard_',
+                            charactersData?.avantGuard
                         )}
                     </div>
-                    <div id="panel3" className="tab_panel chara-select-rows">
+                    <div id="chara_select_tab3" className="chara-select-tab-panel chara-select-rows">
                         {showCharaList(
-                            charactersData.middleGuard,
-                            'middle_guard_'
+                            'middle_guard_',
+                            charactersData?.middleGuard
                         )}
                     </div>
-                    <div id="panel4" className="tab_panel chara-select-rows">
-                        {showCharaList(charactersData.rearGuard, 'rearGuard_')}
+                    <div id="chara_select_tab4" className="chara-select-tab-panel chara-select-rows">
+                        {showCharaList('rearGuard_', charactersData?.rearGuard)}
                     </div>
                 </div>
             </div>
