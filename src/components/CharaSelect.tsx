@@ -33,44 +33,73 @@ const CharaSelect = () => {
     return (
         <>
             <div className="chara-select-tab-wrap">
-                <input id="chara_select_tab1" type="radio" name="tab_btn" defaultChecked />
+                <input
+                    id="chara_select_tab1"
+                    type="radio"
+                    name="tab_btn"
+                    defaultChecked
+                />
                 <input id="chara_select_tab2" type="radio" name="tab_btn" />
                 <input id="chara_select_tab3" type="radio" name="tab_btn" />
                 <input id="chara_select_tab4" type="radio" name="tab_btn" />
                 <div className="chara-select-tab-area">
-                    <label className="chara-select-tab1-label" htmlFor="chara_select_tab1">
+                    <label
+                        className="chara-select-tab1-label"
+                        htmlFor="chara_select_tab1"
+                    >
                         全て
                     </label>
-                    <label className="chara-select-tab2-label" htmlFor="chara_select_tab2">
+                    <label
+                        className="chara-select-tab2-label"
+                        htmlFor="chara_select_tab2"
+                    >
                         {AVANT_GUARD}
                     </label>
-                    <label className="chara-select-tab3-label" htmlFor="chara_select_tab3">
+                    <label
+                        className="chara-select-tab3-label"
+                        htmlFor="chara_select_tab3"
+                    >
                         {MIDDLE_GUARD}
                     </label>
-                    <label className="chara-select-tab4-label" htmlFor="chara_select_tab4">
+                    <label
+                        className="chara-select-tab4-label"
+                        htmlFor="chara_select_tab4"
+                    >
                         {REAR_GUARD}
                     </label>
                 </div>
                 <div className="chara-select-panel-area">
-                    <div id="chara_select_tab1" className="chara-select-tab-panel chara-select-rows">
+                    <div
+                        id="chara_select_tab1"
+                        className="chara-select-tab-panel chara-select-rows"
+                    >
                         {showCharaList(
                             'all_guard_',
                             charactersData?.allCharaData
                         )}
                     </div>
-                    <div id="chara_select_tab2" className="chara-select-tab-panel chara-select-rows">
+                    <div
+                        id="chara_select_tab2"
+                        className="chara-select-tab-panel chara-select-rows"
+                    >
                         {showCharaList(
                             'avant_guard_',
                             charactersData?.avantGuard
                         )}
                     </div>
-                    <div id="chara_select_tab3" className="chara-select-tab-panel chara-select-rows">
+                    <div
+                        id="chara_select_tab3"
+                        className="chara-select-tab-panel chara-select-rows"
+                    >
                         {showCharaList(
                             'middle_guard_',
                             charactersData?.middleGuard
                         )}
                     </div>
-                    <div id="chara_select_tab4" className="chara-select-tab-panel chara-select-rows">
+                    <div
+                        id="chara_select_tab4"
+                        className="chara-select-tab-panel chara-select-rows"
+                    >
                         {showCharaList('rearGuard_', charactersData?.rearGuard)}
                     </div>
                 </div>

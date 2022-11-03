@@ -6,9 +6,11 @@ export type CharacterData = {
     orderFormation: number;
 };
 
-export type CharactersData = {
-    allCharaData: CharacterData[];
-    avantGuard: CharacterData[];
-    middleGuard: CharacterData[];
-    rearGuard: CharacterData[];
-} | undefined;
+export type CharactersData =
+    | {
+          allCharaData: CharacterData[];
+          avantGuard: CharacterData[];
+          middleGuard: CharacterData[];
+          rearGuard: CharacterData[];
+      }
+    | undefined;
