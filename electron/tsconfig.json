@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "commonjs",
-        "sourceMap": true,
-        "outDir": "../build",
-        "rootDir": "../",
-        "paths": {
-            "*": ["./@types/*"]
-        }
-    },
-    "include": ["*"]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "../build",
+    "rootDir": "../",
+    "paths": {
+      "*": ["./@types/*"]
+    }
+  },
+  "include": ["*"]
 }
