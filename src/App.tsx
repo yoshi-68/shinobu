@@ -1,6 +1,6 @@
 import CharaSearch from './components/CharaSearch';
 import CharaSelect from './components/CharaSelect';
-import './css/App.css';
+import './css/style.css';
 
 const App = () => {
   return (

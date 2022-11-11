@@ -1,0 +1,226 @@
+.App {
+  text-align: center;
+}
+
+.chara-select-tab-wrap {
+  width: auto;
+  margin: 0rem 2rem;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.chara-select-tab-area {
+  font-size: 0;
+  padding: 0 55px;
+  white-space: nowrap;
+}
+
+.chara-select-tab-area label {
+  width: 6rem;
+  display: inline-block;
+  padding: 14px 0 12px;
+  color: white;
+  background: #81b5b8;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: ease 0.2s opacity;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  vertical-align: bottom;
+  transition: ease 0.2s;
+  margin: 10px 5px 0;
+}
+
+.chara-select-tab-area label:hover {
+  opacity: 0.5;
+}
+
+.chara-select-panel-area {
+  background: white;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top: 1rem solid #e1f9f9;
+  border-bottom: 1rem solid #e1f9f9;
+  border-radius: 0.8rem;
+}
+
+.chara-select-tab-panel {
+  width: 100%;
+  padding: 1rem 0;
+  display: none;
+  background: #e1f9f9;
+}
+
+.chara-select-tab-panel input {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+#chara_select_tab1:checked ~ .chara-select-tab-area .chara-select-tab1-label {
+  background: #e1f9f9;
+  color: black;
+}
+
+#chara_select_tab1:checked ~ .chara-select-panel-area #chara_select_tab1 {
+  display: block;
+}
+
+#chara_select_tab2:checked ~ .chara-select-tab-area .chara-select-tab2-label {
+  background: #e1f9f9;
+  color: black;
+}
+
+#chara_select_tab2:checked ~ .chara-select-panel-area #chara_select_tab2 {
+  display: block;
+}
+
+#chara_select_tab3:checked ~ .chara-select-tab-area .chara-select-tab3-label {
+  background: #e1f9f9;
+  color: black;
+}
+
+#chara_select_tab3:checked ~ .chara-select-panel-area #chara_select_tab3 {
+  display: block;
+}
+
+#chara_select_tab4:checked ~ .chara-select-tab-area .chara-select-tab4-label {
+  background: #e1f9f9;
+  color: black;
+}
+
+#chara_select_tab4:checked ~ .chara-select-panel-area #chara_select_tab4 {
+  display: block;
+}
+
+.chara-select-rows {
+  padding: 0rem 0rem;
+  text-align: left;
+  height: 17rem;
+  overflow-y: scroll;
+}
+.chara-select-rows::-webkit-scrollbar-track {
+  background: var(--select-chara-type-active);
+}
+.chara-select-rows::-webkit-scrollbar-thumb {
+  background: var(--select-chara-type-non-active);
+  border-radius: 1rem;
+  scrollbar-width: 0.5rem;
+}
+.chara-select-rows::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 1rem;
+}
+
+input.chara-icon {
+  opacity: 0.8;
+  padding: 0.2rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.chara-search-tab-wrap {
+  width: auto;
+  margin: 0rem 2rem;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.chara-search-tab-area {
+  font-size: 0;
+  padding: 0 55px;
+  white-space: nowrap;
+}
+
+.chara-search-tab-area label {
+  width: 6rem;
+  display: inline-block;
+  padding: 14px 0 12px;
+  color: white;
+  background: #de9c9c;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: ease 0.2s opacity;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  vertical-align: bottom;
+  transition: ease 0.2s;
+  margin: 10px 5px 0;
+}
+
+.chara-search-tab-area label:hover {
+  opacity: 0.5;
+}
+
+.chara-search-panel-area {
+  background: white;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top: 1rem solid #ffc4c4;
+  border-bottom: 1rem solid #ffc4c4;
+  border-radius: 0.8rem;
+}
+
+.chara-search-tab-panel {
+  width: 100%;
+  padding: 1rem 0;
+  display: none;
+  background: #ffc4c4;
+}
+
+.chara-search-tab-panel input {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+#chara_search_tab1:checked ~ .chara-search-tab-area .chara-search-tab1-label {
+  background: #ffc4c4;
+  color: black;
+}
+
+#chara_search_tab1:checked ~ .chara-search-panel-area #chara_search_tab1 {
+  display: block;
+}
+
+#chara_search_tab2:checked ~ .chara-search-tab-area .chara-search-tab2-label {
+  background: #ffc4c4;
+  color: black;
+}
+
+#chara_search_tab2:checked ~ .chara-search-panel-area #chara_search_tab2 {
+  display: block;
+}
+
+#chara_search_tab3:checked ~ .chara-search-tab-area .chara-search-tab3-label {
+  background: #ffc4c4;
+  color: black;
+}
+
+#chara_search_tab3:checked ~ .chara-search-panel-area #chara_search_tab3 {
+  display: block;
+}
+
+#chara_search_tab4:checked ~ .chara-search-tab-area .chara-search-tab4-label {
+  background: #ffc4c4;
+  color: black;
+}
+
+#chara_search_tab4:checked ~ .chara-search-panel-area #chara_search_tab4 {
+  display: block;
+}
+
+#chara_search_tab5:checked ~ .chara-search-tab-area .chara-search-tab5-label {
+  background: #ffc4c4;
+  color: black;
+}
+
+#chara_search_tab5:checked ~ .chara-search-panel-area #chara_search_tab5 {
+  display: block;
+}

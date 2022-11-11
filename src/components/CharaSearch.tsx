@@ -1,4 +1,4 @@
-import '../css/CharaSearch.css';
+import '../css/style.css';
 
 const CharaSearch = () => {
   return (

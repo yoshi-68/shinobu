@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CharacterData, CharactersData } from 'types';
 
-import '../css/CharaSelect.css';
+import '../css/style.css';
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../settings';
 
 const showCharaList = (key: string, charaData?: CharacterData[]) => {
