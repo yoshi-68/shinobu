@@ -37,32 +37,34 @@ const searchTabLabelJsx = () => {
   );
 };
 
-const charaSearchJsx = () => {
-  return (
-    <div className="chara-search-tab-wrap">
-      {NUMBER_OF_SEARCH_TAB.map((element, index) => {
-        let isChecked = false;
-        if (index === 0) {
-          isChecked = true;
-        }
-        return (
-          <input
-            key={index}
-            id={'chara_search_tab' + (index + 1)}
-            type="radio"
-            name="chara_search_tab_btn"
-            defaultChecked={isChecked}
-          />
-        );
-      })}
-      {searchTabLabelJsx()}
-      {searchPanelJsx()}
-    </div>
-  );
+const searchRadioJsx = () => {
+  return NUMBER_OF_SEARCH_TAB.map((element, index) => {
+    let isChecked = false;
+    if (index === 0) {
+      isChecked = true;
+    }
+    return (
+      <input
+        key={index}
+        id={'chara_search_tab' + (index + 1)}
+        type="radio"
+        name="chara_search_tab_btn"
+        defaultChecked={isChecked}
+      />
+    );
+  });
 };
 
 const CharaSearch = () => {
-  return <>{charaSearchJsx()}</>;
+  return (
+    <>
+      <div className="chara-search-tab-wrap">
+        {searchRadioJsx()}
+        {searchTabLabelJsx()}
+        {searchPanelJsx()}
+      </div>
+    </>
+  );
 };
 
 export default CharaSearch;
