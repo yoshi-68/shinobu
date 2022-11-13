@@ -1,67 +1,92 @@
 import '../css/style.css';
 import { NUMBER_OF_SEARCH_TAB } from '../settings';
 
+type SearchRadioProps = {
+  index: number;
+  isChecked: boolean;
+};
+
+const SearchRadio = (props: SearchRadioProps) => {
+  const {index, isChecked} = props;
+  return (
+    <input
+      id={'chara_search_tab' + index}
+      type="radio"
+      name="chara_search_tab_btn"
+      defaultChecked={isChecked}
+    />
+  );
+};
+
+type SearchTabLabelProps = {
+  index: number;
+  element: string;
+};
+
+const SearchTabLabel = (props: SearchTabLabelProps) => {
+  const {index, element} = props;
+  return (
+    <label
+      className={'chara-search-tab' + index + '-label'}
+      htmlFor={'chara_search_tab' + index}
+    >
+      {element}
+    </label>
+  );
+};
+
+type SearchPanelProps = {
+  index: number;
+  element: string;
+};
+
+const SearchPanel = (props: SearchPanelProps) => {
+  const {index, element} = props;
+  return (
+    <div
+      id={'chara_search_tab' + index}
+      className="chara-search-tab-panel chara-search-rows"
+    >
+      {element}
+    </div>
+  );
+};
+
 const CharaSearch = () => {
-  const searchPanelJsx = () => {
-    return (
-      <div className="chara-search-panel-area">
-        {NUMBER_OF_SEARCH_TAB.map((element, index) => {
-          return (
-            <div
-              key={index}
-              id={'chara_search_tab' + (index + 1)}
-              className="chara-search-tab-panel chara-search-rows"
-            >
-              {element}
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const searchTabLabelJsx = () => {
-    return (
-      <div className="chara-search-tab-area">
-        {NUMBER_OF_SEARCH_TAB.map((element, index) => {
-          return (
-            <label
-              key={index}
-              className={'chara-search-tab' + (index + 1) + '-label'}
-              htmlFor={'chara_search_tab' + (index + 1)}
-            >
-              {element}
-            </label>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const searchRadioJsx = () => {
-    return NUMBER_OF_SEARCH_TAB.map((element, index) => {
-      let isChecked = false;
-      if (index === 0) {
-        isChecked = true;
-      }
-      return (
-        <input
-          key={index}
-          id={'chara_search_tab' + (index + 1)}
-          type="radio"
-          name="chara_search_tab_btn"
-          defaultChecked={isChecked}
-        />
-      );
-    });
-  };
-
   return (
     <>
       <div className="chara-search-tab-wrap">
-        {searchRadioJsx()}
-        {searchTabLabelJsx()}
-        {searchPanelJsx()}
+        {NUMBER_OF_SEARCH_TAB.map((element, index) => {
+          return (
+            <SearchRadio
+              key={'searchRadio' + index}
+              index={index + 1}
+              isChecked={index === 0}
+            />
+          );
+        })}
+        <div className="chara-search-tab-area">
+          {NUMBER_OF_SEARCH_TAB.map((element, index) => {
+            return (
+              <SearchTabLabel
+                key={'searchTabLabel' + index}
+                index={index + 1}
+                element={element}
+              />
+            );
+          })}
+        </div>
+        <div className="chara-search-panel-area">
+          {NUMBER_OF_SEARCH_TAB.map((element, index) => {
+            return (
+              <SearchPanel
+                key={'searchPanel' + index}
+                index={index + 1}
+                element={element}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
