@@ -19,7 +19,7 @@ const CharaSearch = () => {
       </div>
     );
   };
-  
+
   const searchTabLabelJsx = () => {
     return (
       <div className="chara-search-tab-area">
@@ -37,7 +37,7 @@ const CharaSearch = () => {
       </div>
     );
   };
-  
+
   const searchRadioJsx = () => {
     return NUMBER_OF_SEARCH_TAB.map((element, index) => {
       let isChecked = false;
