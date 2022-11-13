@@ -5,3 +5,10 @@ export const USER_AGENT =
 export const AVANT_GUARD = '前衛';
 export const MIDDLE_GUARD = '中衛';
 export const REAR_GUARD = '後衛';
+export const NUMBER_OF_SEARCH_TAB = [
+  'チーム1',
+  'チーム2',
+  'チーム3',
+  'チーム4',
+  'チーム5',
+];
