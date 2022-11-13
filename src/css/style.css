@@ -2,13 +2,13 @@
   text-align: center;
 }
 
+input[type=radio] {
+  display: none;
+}
+
 .chara-select-tab-wrap {
   width: auto;
   margin: 0rem 2rem;
-}
-
-input[type=radio] {
-  display: none;
 }
 
 .chara-select-tab-area {
@@ -103,10 +103,10 @@ input[type=radio] {
   overflow-y: scroll;
 }
 .chara-select-rows::-webkit-scrollbar-track {
-  background: var(--select-chara-type-active);
+  background: #e1f9f9;
 }
 .chara-select-rows::-webkit-scrollbar-thumb {
-  background: var(--select-chara-type-non-active);
+  background: #81b5b8;
   border-radius: 1rem;
   scrollbar-width: 0.5rem;
 }
@@ -125,10 +125,6 @@ input.chara-icon {
 .chara-search-tab-wrap {
   width: auto;
   margin: 0rem 2rem;
-}
-
-input[type=radio] {
-  display: none;
 }
 
 .chara-search-tab-area {

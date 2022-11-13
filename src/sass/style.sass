@@ -13,6 +13,9 @@ $searchCharaTabNonActive: #de9c9c
 .App
   text-align: center
 
+input[type='radio']
+  display: none
+
 // **********************
 // キャラクターセレクト部
 // **********************
@@ -20,9 +23,6 @@ $searchCharaTabNonActive: #de9c9c
 .chara-select-tab-wrap
   width: auto
   margin: 0rem 2rem
-
-input[type='radio']
-  display: none
 
 .chara-select-tab-area
   font-size: 0
@@ -81,10 +81,10 @@ input[type='radio']
   overflow-y: scroll
 
   &::-webkit-scrollbar-track
-    background: var(--select-chara-type-active)
+    background: $selectCharaTabActive
 
   &::-webkit-scrollbar-thumb
-    background: var(--select-chara-type-non-active)
+    background: $selectCharaTabNonActive
     border-radius: 1rem
     scrollbar-width: 0.5rem
 
@@ -105,9 +105,6 @@ input.chara-icon
 .chara-search-tab-wrap
   width: auto
   margin: 0rem 2rem
-
-input[type='radio']
-  display: none
 
 .chara-search-tab-area
   font-size: 0
