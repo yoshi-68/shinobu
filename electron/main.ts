@@ -17,10 +17,10 @@ const isPackaged = app.isPackaged;
 
 const createWindow = () => {
   const winParam = {
-    width: 800,
+    width: 750,
     height: 1000,
     minHeight: 800,
-    minWidth: 600,
+    minWidth: 750,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
