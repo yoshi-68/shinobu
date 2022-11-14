@@ -7,7 +7,7 @@ type SearchRadioProps = {
 };
 
 const SearchRadio = (props: SearchRadioProps) => {
-  const {index, isChecked} = props;
+  const { index, isChecked } = props;
   return (
     <input
       id={'chara_search_tab' + index}
@@ -24,7 +24,7 @@ type SearchTabLabelProps = {
 };
 
 const SearchTabLabel = (props: SearchTabLabelProps) => {
-  const {index, element} = props;
+  const { index, element } = props;
   return (
     <label
       className={'chara-search-tab' + index + '-label'}
@@ -41,7 +41,7 @@ type SearchPanelProps = {
 };
 
 const SearchPanel = (props: SearchPanelProps) => {
-  const {index, element} = props;
+  const { index, element } = props;
   return (
     <div
       id={'chara_search_tab' + index}
