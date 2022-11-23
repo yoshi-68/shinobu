@@ -1,5 +1,5 @@
-import '../css/style.css';
-import { NUMBER_OF_SEARCH_TAB } from '../settings';
+import '../../css/style.css';
+import { NUMBER_OF_SEARCH_TAB } from '../../settings';
 
 type SearchRadioProps = {
   index: number;

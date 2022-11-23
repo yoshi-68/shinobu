@@ -1,34 +1,34 @@
 import { useEffect, useState } from 'react';
-import { CharacterData, CharactersData } from 'types';
+import { Character, Guards } from 'types';
 
-import '../css/style.css';
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../settings';
+import '../../css/style.css';
+import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../../settings';
+import { CharactersIcon } from './CharacterIcons';
 
-const showCharaList = (key: string, charaData?: CharacterData[]) => {
-  return (
-    <div id={key + 'characters'}>
-      {charaData?.map((element) => (
-        <input
-          type="image"
-          key={key + element.id}
-          className="chara-icon"
-          src={element.iconPath}
-          alt={element.name}
-          title={element.name}
-        />
-      ))}
-    </div>
-  );
-};
-
-const CharaSelect = () => {
-  const [charactersData, setCharactersData] = useState({} as CharactersData);
+export const CharacterSelect = () => {
+  const [guards, setGuards] = useState<Guards>();
 
   useEffect(() => {
-    window.electron.getCharaData().then((res?: CharactersData) => {
-      setCharactersData(res);
+    window.electron.getCharaData().then((res?: Guards) => {
+      setGuards(res);
     });
   }, []);
+
+  const allGuards = guards?.allGuards.entries()
+    ? Array.from(guards.allGuards.entries())
+    : [];
+
+  const avantGuards = guards?.avantGuards.entries()
+    ? Array.from(guards.avantGuards.entries())
+    : [];
+
+  const middleGuards = guards?.middleGuards.entries()
+    ? Array.from(guards.middleGuards.entries())
+    : [];
+
+  const rearGuards = guards?.rearGuards.entries()
+    ? Array.from(guards.rearGuards.entries())
+    : [];
 
   return (
     <>
@@ -85,30 +85,54 @@ const CharaSelect = () => {
             id="chara_select_tab1"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {showCharaList('all_guard_', charactersData?.allCharaData)}
+            <div id={'allGuards' + 'Characters'}>
+              {allGuards.map((v, i) => (
+                <CharactersIcon
+                  key={'charactersIcon' + i}
+                  charaName={v[1].name}
+                  iconPath={v[1].iconPath}
+                ></CharactersIcon>
+              ))}
+            </div>
           </div>
           <div
             id="chara_select_tab2"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {showCharaList('avant_guard_', charactersData?.avantGuard)}
+            {avantGuards.map((v, i) => (
+              <CharactersIcon
+                key={'charactersIcon' + i}
+                charaName={v[1].name}
+                iconPath={v[1].iconPath}
+              ></CharactersIcon>
+            ))}
           </div>
           <div
             id="chara_select_tab3"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {showCharaList('middle_guard_', charactersData?.middleGuard)}
+            {middleGuards.map((v, i) => (
+              <CharactersIcon
+                key={'charactersIcon' + i}
+                charaName={v[1].name}
+                iconPath={v[1].iconPath}
+              ></CharactersIcon>
+            ))}
           </div>
           <div
             id="chara_select_tab4"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {showCharaList('rearGuard_', charactersData?.rearGuard)}
+            {rearGuards.map((v, i) => (
+              <CharactersIcon
+                key={'charactersIcon' + i}
+                charaName={v[1].name}
+                iconPath={v[1].iconPath}
+              ></CharactersIcon>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
 };
-
-export default CharaSelect;
