@@ -1,17 +1,11 @@
-import React, { createContext, useCallback, useState } from 'react';
-
-import CharaSearch from './components/CharacterSearch/CharacterSearch';
-import { CharacterSelect } from './components/CharacterSelect/CharacterSelect';
-import './css/style.css';
+import { Index } from './components/pages';
+import './sass/app.sass';
 
 const App = () => {
   return (
-    <>
-      <div className="App">
-        <CharacterSelect />
-        <CharaSearch />
-      </div>
-    </>
+    <div className="App">
+      <Index />
+    </div>
   );
 };
 

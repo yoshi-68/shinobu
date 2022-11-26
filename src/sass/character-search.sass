@@ -1,0 +1,58 @@
+$numberOfSearchTab: 5
+$searchCharaTabActive: #ffc4c4
+$searchCharaTabNonActive: #de9c9c
+
+.chara-search-tab-wrap
+    width: auto
+    margin: 0rem 2rem
+
+.chara-search-tab-area
+    font-size: 0
+    padding: 0 55px
+    white-space: nowrap
+
+.chara-search-tab-area label
+    width: 6rem
+    display: inline-block
+    padding: 14px 0 12px
+    color: white
+    background: $searchCharaTabNonActive
+    text-align: center
+    font-size: 13px
+    cursor: pointer
+    transition: ease 0.2s opacity
+    border-top-left-radius: 10px
+    border-top-right-radius: 10px
+    vertical-align: bottom
+    transition: ease 0.2s
+    margin: 10px 5px 0
+
+.chara-search-tab-area label:hover
+    opacity: 0.5
+
+.chara-search-panel-area
+    background: white
+    border-bottom-right-radius: 10px
+    border-bottom-left-radius: 10px
+    border-top: 1rem solid $searchCharaTabActive
+    border-bottom: 1rem solid $searchCharaTabActive
+    border-radius: 0.8rem
+
+.chara-search-tab-panel
+    width: 100%
+    padding: 1rem 0
+    display: none
+    background: $searchCharaTabActive
+
+.chara-search-tab-panel input
+    font-size: 14px
+    letter-spacing: 1px
+    text-align: left
+
+@for $index from 1 through $numberOfSearchTab
+    #chara_search_tab#{$index}:checked ~ .chara-search-tab-area .chara-search-tab#{$index}-label
+        background: $searchCharaTabActive
+        color: black
+
+    #chara_search_tab#{$index}:checked ~ .chara-search-panel-area #chara_search_tab#{$index}
+        display: block

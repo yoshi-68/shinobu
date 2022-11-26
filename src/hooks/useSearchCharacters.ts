@@ -2,12 +2,12 @@ export {};
 
 // import { createContext, useCallback, useReducer, useState } from 'react';
 // import {
-//   RequestCharacters,
+// SearchRequest,
 //   SearchCharactersAction,
 //   SelectedCharacters,
 // } from 'types';
 
-// export const defualtRequestCharacters = createContext<RequestCharacters>({
+// export const initialState = createContext<SearchRequest>({
 //   tabIndex: 1,
 //   setIndex: () => {},
 //   selectedCharacters: new Map<number, SelectedCharacters>(),

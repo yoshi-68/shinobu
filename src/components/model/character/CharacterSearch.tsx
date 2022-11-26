@@ -1,5 +1,5 @@
-import '../../css/style.css';
-import { NUMBER_OF_SEARCH_TAB } from '../../settings';
+import '../../../sass/character-search.sass';
+import { NUMBER_OF_SEARCH_TAB } from '../../../settings';
 
 type SearchRadioProps = {
   index: number;
@@ -52,7 +52,7 @@ const SearchPanel = (props: SearchPanelProps) => {
   );
 };
 
-const CharaSearch = () => {
+export const CharaSearch = () => {
   return (
     <>
       <div className="chara-search-tab-wrap">
@@ -91,5 +91,3 @@ const CharaSearch = () => {
     </>
   );
 };
-
-export default CharaSearch;

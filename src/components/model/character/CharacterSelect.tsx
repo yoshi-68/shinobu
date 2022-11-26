@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Character, Guards } from 'types';
 
-import '../../css/style.css';
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../../settings';
+import '../../../sass/character-select.sass';
+import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../../../settings';
 import { CharactersIcon } from './CharacterIcons';
 
 export const CharacterSelect = () => {
