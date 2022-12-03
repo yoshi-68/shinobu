@@ -19,10 +19,11 @@ export type Guards =
 type TabIndex = number;
 
 export type SearchRequest = {
-  tabIndex: TabIndex;
-  setIndex: (index: number) => void;
-  charactersSelectedTabs: Map<TabIndex, Characters>;
-  setSelectedCharacters: (characters: Characters) => void;
+  selectedTabIndex: number;
+  charactersSelectedTabs: Map<TabIndex, Characters[]>;
 };
 
 export type SearchCharactersAction = 'index' | 'character';
+export type SetSelectedSearchTabIndex = React.Dispatch<
+  React.SetStateAction<number>
+>;
