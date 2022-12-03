@@ -1,9 +1,6 @@
-import { SetSelectedSearchTabIndex } from 'types';
-
 type SearchRadioProps = {
   index: number;
   isChecked: boolean;
-  setSelectedSearchTabIndex: SetSelectedSearchTabIndex;
 };
 
 export const SearchTabRadio = (props: SearchRadioProps) => {
