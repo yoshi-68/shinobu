@@ -1,6 +1,6 @@
 export type Character =
   | {
-      id: number
+      id: number;
       name: string;
       iconPath: string;
       guardType: string;

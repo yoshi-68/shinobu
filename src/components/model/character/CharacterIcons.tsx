@@ -8,8 +8,8 @@ type Props = {
 export const CharactersIcon = (props: Props) => {
   let { iconPath, charaName } = props;
 
-  iconPath = iconPath !== undefined? iconPath: no_character;
-  charaName = charaName !== undefined? charaName:'No Character';
+  iconPath = iconPath !== undefined ? iconPath : no_character;
+  charaName = charaName !== undefined ? charaName : 'No Character';
 
   return (
     <input
