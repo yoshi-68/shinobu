@@ -1,4 +1,8 @@
-import { SetSelectedSearchTabIndex } from 'types';
+import {
+  Characters,
+  SetSelectedCharacters,
+  SetSelectedSearchTabIndex,
+} from 'types';
 
 import '../../../sass/character-search.sass';
 import { NUMBER_OF_SEARCH_TAB } from '../../../settings';
@@ -9,9 +13,18 @@ import { SearchTabRadio } from './SearchTabRadio';
 type Props = {
   selectedSearchTabIndex: number;
   setSelectedSearchTabIndex: SetSelectedSearchTabIndex;
+  selectedCharacters: Characters[];
+  setSelectedCharacters: SetSelectedCharacters;
 };
 
 export const CharaSearch = (props: Props) => {
+  const {
+    selectedSearchTabIndex,
+    setSelectedSearchTabIndex,
+    selectedCharacters,
+    setSelectedCharacters,
+  } = props;
+
   return (
     <>
       <div className="chara-search-tab-wrap">
@@ -31,7 +44,7 @@ export const CharaSearch = (props: Props) => {
                 key={'searchTabLabel' + index}
                 index={index + 1}
                 labelName={element}
-                setSelectedSearchTabIndex={props.setSelectedSearchTabIndex}
+                setSelectedSearchTabIndex={setSelectedSearchTabIndex}
               />
             );
           })}
@@ -42,7 +55,8 @@ export const CharaSearch = (props: Props) => {
               <SearchPanel
                 key={'searchPanel' + index}
                 index={index + 1}
-                element={element}
+                selectedCharacter={selectedCharacters[index]}
+                setSelectedCharacters={setSelectedCharacters}
               />
             );
           })}

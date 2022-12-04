@@ -1,9 +1,11 @@
-export type Character = {
-  name: string;
-  iconPath: string;
-  guardType: string;
-  orderFormation: number;
-};
+export type Character =
+  | {
+      name: string;
+      iconPath: string;
+      guardType: string;
+      orderFormation: number;
+    }
+  | undefined;
 
 export type Characters = Map<number, Character>;
 
@@ -23,7 +25,10 @@ export type SearchRequest = {
   charactersSelectedTabs: Map<TabIndex, Characters[]>;
 };
 
-export type SearchCharactersAction = 'index' | 'character';
 export type SetSelectedSearchTabIndex = React.Dispatch<
   React.SetStateAction<number>
+>;
+
+export type SetSelectedCharacters = React.Dispatch<
+  React.SetStateAction<Characters[]>
 >;

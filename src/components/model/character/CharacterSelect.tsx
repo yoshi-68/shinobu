@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Character, Guards } from 'types';
+import { Guards } from 'types';
 
 import '../../../sass/character-select.sass';
 import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../../../settings';
@@ -89,8 +89,8 @@ export const CharacterSelect = () => {
               {allGuards.map((v, i) => (
                 <CharactersIcon
                   key={'charactersIcon' + i}
-                  charaName={v[1].name}
-                  iconPath={v[1].iconPath}
+                  charaName={v[1]?.name}
+                  iconPath={v[1]?.iconPath}
                 ></CharactersIcon>
               ))}
             </div>
@@ -102,8 +102,8 @@ export const CharacterSelect = () => {
             {avantGuards.map((v, i) => (
               <CharactersIcon
                 key={'charactersIcon' + i}
-                charaName={v[1].name}
-                iconPath={v[1].iconPath}
+                charaName={v[1]?.name}
+                iconPath={v[1]?.iconPath}
               ></CharactersIcon>
             ))}
           </div>
@@ -114,8 +114,8 @@ export const CharacterSelect = () => {
             {middleGuards.map((v, i) => (
               <CharactersIcon
                 key={'charactersIcon' + i}
-                charaName={v[1].name}
-                iconPath={v[1].iconPath}
+                charaName={v[1]?.name}
+                iconPath={v[1]?.iconPath}
               ></CharactersIcon>
             ))}
           </div>
@@ -126,8 +126,8 @@ export const CharacterSelect = () => {
             {rearGuards.map((v, i) => (
               <CharactersIcon
                 key={'charactersIcon' + i}
-                charaName={v[1].name}
-                iconPath={v[1].iconPath}
+                charaName={v[1]?.name}
+                iconPath={v[1]?.iconPath}
               ></CharactersIcon>
             ))}
           </div>
