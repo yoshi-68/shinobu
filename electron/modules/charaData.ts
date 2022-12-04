@@ -12,6 +12,7 @@ const setCharaData = (
   orderFormation: number
 ) => {
   const character = {
+    id: attr["value"],
     name: attr['data-name'],
     iconPath: attr['data-img'],
     guardType: attr['data-position'],
