@@ -1,3 +1,4 @@
+import { CharacterGroup } from '@types';
 import { BrowserWindow, app, ipcMain, session } from 'electron';
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
@@ -5,12 +6,11 @@ import installExtension, {
 } from 'electron-devtools-installer';
 import * as appLogger from 'electron-log';
 import * as path from 'path';
-import { Guards } from 'types';
 import * as url from 'url';
 
-import { MAXIMUM_LOG_FILE_SIZE } from '../settings';
 import { getCharaData } from './modules/charaData';
 import { toOneLine } from './modules/format';
+import { MAXIMUM_LOG_FILE_SIZE } from './settings';
 
 appLogger.transports.file.maxSize = MAXIMUM_LOG_FILE_SIZE;
 const isPackaged = app.isPackaged;
@@ -62,9 +62,6 @@ process.on('uncaughtException', (error: Error) => {
   app.quit();
 });
 
-const logInfo = (event: Event, ...params: any[]): void =>
-  appLogger.info(...params);
-
 app.whenReady().then(async () => {
   appLogger.info(
     `********** アプリケーション起動: version ${app.getVersion()} **********`
@@ -82,11 +79,17 @@ app.whenReady().then(async () => {
   // await installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
 });
 
+const logInfo = (event: Event, ...params: any[]): void =>
+  appLogger.info(...params);
+
 //----------------------------------------
 // IPC通信
 //----------------------------------------
 ipcMain.on('log-info', logInfo);
-ipcMain.handle('get-chara-data', async (event: Event): Promise<Guards> => {
-  const guards = await getCharaData();
-  return guards;
-});
+ipcMain.handle(
+  'get-chara-data',
+  async (event: Event): Promise<CharacterGroup> => {
+    const characterGroup = await getCharaData();
+    return characterGroup;
+  }
+);

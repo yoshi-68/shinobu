@@ -1,4 +1,4 @@
-import { SetSelectedSearchTabIndex } from 'types';
+import { SetSelectedSearchTabIndex } from '@types';
 
 type SearchTabLabelProps = {
   index: number;

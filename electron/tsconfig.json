@@ -5,8 +5,10 @@
     "sourceMap": true,
     "outDir": "../build",
     "rootDir": "../",
+    "baseUrl": "./",
     "paths": {
-      "*": ["./@types/*"]
+      "@/*": ["./*"],
+      "@types": ["./@types/types"]
     }
   },
   "include": ["*"]

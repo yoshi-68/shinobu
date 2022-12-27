@@ -1,3 +1,3 @@
 export { CharactersIcon } from './CharacterIcons';
-export { CharaSearch } from './CharacterSearch';
+export { CharacterSearch } from './CharacterSearch';
 export { CharacterSelect } from './CharacterSelect';

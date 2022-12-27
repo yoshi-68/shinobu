@@ -25,7 +25,7 @@
   },
   "scripts": {
     "sass": "sass src/sass/:src/sass/dist/ --no-source-map",
-    "fmt": "concurrently \"prettier --write \"settings.ts\"\" \"prettier --write \"src/**/*.{json,ts,tsx,html,css}\"\" \"prettier --write \"electron/**/*.{js,json,ts,tsx,html}\"\"",
+    "fmt": "concurrently \"prettier --write \"tsconfig.json\"\" \"prettier --write \"src/**/*.{json,ts,tsx,html,css}\"\" \"prettier --write \"electron/**/*.{js,json,ts,tsx,html}\"\"",
     "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "start": "react-scripts start",
     "build": "react-scripts build",

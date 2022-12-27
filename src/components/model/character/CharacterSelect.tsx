@@ -1,34 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Guards } from 'types';
+import { Character, CharacterGroup } from '@types';
 
 import '../../../sass/character-select.sass';
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../../../settings';
+import { BACKWARD_GUARD, FORWARD_GUARD, MIDDLE_GUARD } from '../../../settings';
 import { CharactersIcon } from './CharacterIcons';
 
-export const CharacterSelect = () => {
-  const [guards, setGuards] = useState<Guards>();
+type CharacterSelectProps = {
+  characterGroup: Partial<CharacterGroup>;
+  setTeam1Characters: React.Dispatch<React.SetStateAction<Character[]>>;
+  team1Characters: Character[];
+};
 
-  useEffect(() => {
-    window.electron.getCharaData().then((res?: Guards) => {
-      setGuards(res);
-    });
-  }, []);
+export const CharacterSelect = (props: CharacterSelectProps) => {
+  const { characterGroup, setTeam1Characters, team1Characters } = props;
 
-  const allGuards = guards?.allGuards.entries()
-    ? Array.from(guards.allGuards.entries())
-    : [];
-
-  const avantGuards = guards?.avantGuards.entries()
-    ? Array.from(guards.avantGuards.entries())
-    : [];
-
-  const middleGuards = guards?.middleGuards.entries()
-    ? Array.from(guards.middleGuards.entries())
-    : [];
-
-  const rearGuards = guards?.rearGuards.entries()
-    ? Array.from(guards.rearGuards.entries())
-    : [];
+  const allTab = characterGroup.allTab;
+  const forwardTab = characterGroup.forwardTab;
+  const middleTab = characterGroup.middleTab;
+  const backwardTab = characterGroup.backwardTab;
 
   return (
     <>
@@ -65,7 +53,7 @@ export const CharacterSelect = () => {
             className="chara-select-tab2-label"
             htmlFor="chara_select_tab2"
           >
-            {AVANT_GUARD}
+            {FORWARD_GUARD}
           </label>
           <label
             className="chara-select-tab3-label"
@@ -77,7 +65,7 @@ export const CharacterSelect = () => {
             className="chara-select-tab4-label"
             htmlFor="chara_select_tab4"
           >
-            {REAR_GUARD}
+            {BACKWARD_GUARD}
           </label>
         </div>
         <div className="chara-select-panel-area">
@@ -86,12 +74,13 @@ export const CharacterSelect = () => {
             className="chara-select-tab-panel chara-select-rows"
           >
             <div id={'allGuards' + 'Characters'}>
-              {allGuards.map((v, i) => (
+              {allTab?.map((charaData, index) => (
                 <CharactersIcon
-                  key={'charactersIcon' + i}
-                  charaName={v[1]?.name}
-                  iconPath={v[1]?.iconPath}
-                ></CharactersIcon>
+                  key={'charactersIcon' + index}
+                  charaData={charaData}
+                  setTeam1Characters={setTeam1Characters}
+                  team1Characters={team1Characters}
+                />
               ))}
             </div>
           </div>
@@ -99,36 +88,39 @@ export const CharacterSelect = () => {
             id="chara_select_tab2"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {avantGuards.map((v, i) => (
+            {forwardTab?.map((charaData, index) => (
               <CharactersIcon
-                key={'charactersIcon' + i}
-                charaName={v[1]?.name}
-                iconPath={v[1]?.iconPath}
-              ></CharactersIcon>
+                key={'charactersIcon' + index}
+                charaData={charaData}
+                setTeam1Characters={setTeam1Characters}
+                team1Characters={team1Characters}
+              />
             ))}
           </div>
           <div
             id="chara_select_tab3"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {middleGuards.map((v, i) => (
+            {middleTab?.map((charaData, index) => (
               <CharactersIcon
-                key={'charactersIcon' + i}
-                charaName={v[1]?.name}
-                iconPath={v[1]?.iconPath}
-              ></CharactersIcon>
+                key={'charactersIcon' + index}
+                charaData={charaData}
+                setTeam1Characters={setTeam1Characters}
+                team1Characters={team1Characters}
+              />
             ))}
           </div>
           <div
             id="chara_select_tab4"
             className="chara-select-tab-panel chara-select-rows"
           >
-            {rearGuards.map((v, i) => (
+            {backwardTab?.map((charaData, index) => (
               <CharactersIcon
-                key={'charactersIcon' + i}
-                charaName={v[1]?.name}
-                iconPath={v[1]?.iconPath}
-              ></CharactersIcon>
+                key={'charactersIcon' + index}
+                charaData={charaData}
+                setTeam1Characters={setTeam1Characters}
+                team1Characters={team1Characters}
+              />
             ))}
           </div>
         </div>

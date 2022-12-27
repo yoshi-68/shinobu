@@ -1,53 +1,53 @@
+import { Character, CharacterGroup } from '@types';
 import * as cheerio from 'cheerio';
 import * as appLogger from 'electron-log';
 import * as superagent from 'superagent';
-import { Character, Characters, Guards } from 'types';
 
-import { AVANT_GUARD, MIDDLE_GUARD, REAR_GUARD } from '../../settings';
-import { GET_CHARA_DATA_URL, USER_AGENT } from '../../settings';
+import { BACKWARD_GUARD, FORWARD_GUARD, MIDDLE_GUARD } from '../settings';
+import { GET_CHARA_DATA_URL, USER_AGENT } from '../settings';
 
 const setCharaData = (
   attr: cheerio.Element,
-  characters: Characters,
+  characters: Character[],
   orderFormation: number
 ) => {
-  const character = {
+  characters.push({
     id: attr['value'],
     name: attr['data-name'],
     iconPath: attr['data-img'],
     guardType: attr['data-position'],
     orderFormation,
-  };
-  characters.set(Number(attr['value']), character);
+  });
 };
 
-const createCharaData = (charaRawData: cheerio.Cheerio): Guards => {
-  const allGuards: Characters = new Map<number, Character>();
-  const avantGuards: Characters = new Map<number, Character>();
-  const middleGuards: Characters = new Map<number, Character>();
-  const rearGuards: Characters = new Map<number, Character>();
+const createCharaData = (charaRawData: cheerio.Cheerio) => {
+  const allTab: Character[] = [];
+  const forwardTab: Character[] = [];
+  const middleTab: Character[] = [];
+  const backwardTab: Character[] = [];
 
-  charaRawData.each((index: number, element: cheerio.Element) => {
+  charaRawData.each((index, element) => {
     const attr = element['attribs'];
     const orderFormation = index + 1;
-    setCharaData(attr, allGuards, orderFormation);
+
+    setCharaData(attr, allTab, orderFormation);
 
     const guardType = attr['data-position'];
-    if (guardType === AVANT_GUARD) {
-      setCharaData(attr, avantGuards, orderFormation);
+    if (guardType === FORWARD_GUARD) {
+      setCharaData(attr, forwardTab, orderFormation);
     } else if (guardType === MIDDLE_GUARD) {
-      setCharaData(attr, middleGuards, orderFormation);
-    } else if (guardType === REAR_GUARD) {
-      setCharaData(attr, rearGuards, orderFormation);
+      setCharaData(attr, middleTab, orderFormation);
+    } else if (guardType === BACKWARD_GUARD) {
+      setCharaData(attr, backwardTab, orderFormation);
     }
   });
 
-  return { allGuards, avantGuards, middleGuards, rearGuards };
+  return { allTab, forwardTab, middleTab, backwardTab };
 };
 
-export const getCharaData = async (): Promise<Guards> => {
+export const getCharaData = async (): Promise<CharacterGroup> => {
   appLogger.info('キャラデータの取得を開始');
-  let guards: Guards;
+  let characterGroup: CharacterGroup;
   await superagent
     .get(GET_CHARA_DATA_URL)
     .set('User-Agent', USER_AGENT)
@@ -59,12 +59,15 @@ export const getCharaData = async (): Promise<Guards> => {
 
       const $ = cheerio.load(res.text);
       const charaRawData = $('#char_selected').children('input');
-      guards = createCharaData(charaRawData);
+
+      // console.log('charaRowData', charaRawData);
+
+      characterGroup = createCharaData(charaRawData);
     })
     .catch((error) => {
       appLogger.error('エラーが発生:', error);
     });
   appLogger.info('キャラデータの取得を完了');
 
-  return guards;
+  return characterGroup;
 };

@@ -1,24 +1,22 @@
-import { Characters, SetSelectedCharacters } from 'types';
+import { Character } from '@types';
 
 import { SearchResult } from './SearchResult';
 import { SelectedCharacters } from './SelectedCharacters';
 
 type SearchPanelProps = {
   index: number;
-  selectedCharacter: Characters;
-  setSelectedCharacters: SetSelectedCharacters;
+  team1Characters: Character[];
 };
 
 export const SearchPanel = (props: SearchPanelProps) => {
-  const { index, selectedCharacter, setSelectedCharacters } = props;
+  const { index, team1Characters } = props;
 
   return (
     <div id={'chara_search_tab' + index} className="chara-search-tab-panel">
       <SelectedCharacters
         key={'selectedCharacters' + index}
         index={index}
-        selectedCharacter={selectedCharacter}
-        setSelectedCharacters={setSelectedCharacters}
+        team1Characters={team1Characters}
       />
       <SearchResult key={'searchRows' + index} />
     </div>
