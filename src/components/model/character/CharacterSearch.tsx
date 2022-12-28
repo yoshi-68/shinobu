@@ -10,11 +10,16 @@ type Props = {
   selectedSearchTabIndex: number;
   setSelectedSearchTabIndex: SetSelectedSearchTabIndex;
   team1Characters: Character[];
+  setTeam1Characters: React.Dispatch<React.SetStateAction<Character[]>>;
 };
 
 export const CharacterSearch = (props: Props) => {
-  const { selectedSearchTabIndex, setSelectedSearchTabIndex, team1Characters } =
-    props;
+  const {
+    selectedSearchTabIndex,
+    setSelectedSearchTabIndex,
+    team1Characters,
+    setTeam1Characters,
+  } = props;
 
   return (
     <>
@@ -47,6 +52,7 @@ export const CharacterSearch = (props: Props) => {
                 key={'searchPanel' + index}
                 index={index + 1}
                 team1Characters={team1Characters}
+                setTeam1Characters={setTeam1Characters}
               />
             );
           })}

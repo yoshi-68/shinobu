@@ -38,6 +38,7 @@ export const Index = () => {
         selectedSearchTabIndex={selectedSearchTabIndex}
         setSelectedSearchTabIndex={setSelectedSearchTabIndex}
         team1Characters={team1Characters}
+        setTeam1Characters={setTeam1Characters}
       />
     </>
   );
