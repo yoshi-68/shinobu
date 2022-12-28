@@ -21,9 +21,8 @@ export const CharactersIcon = (props: CharactersIconProps) => {
     charactersData.push(charaData);
 
     // キャラクターを隊列順にソートする
-    const compareOrderFormation = (a: Character, b: Character) =>
-      a.orderFormation - b.orderFormation;
-    charactersData.sort(compareOrderFormation);
+    charactersData.sort((a: Character, b: Character) =>
+      a.orderFormation - b.orderFormation);
     setTeam1Characters(charactersData);
   };
 
