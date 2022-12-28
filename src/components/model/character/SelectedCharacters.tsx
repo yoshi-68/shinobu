@@ -1,7 +1,7 @@
 import { Character } from '@types';
 
 import noSelected from '../../../images/no_character.png';
-import searchIcon from '../../../images/search.svg';
+import clearIcon from '../../../images/clear.svg';
 import { MAX_NUM_CHARA_SELECTION } from '../../../settings';
 
 type SelectedCharactersProps = {
@@ -29,6 +29,10 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
     setTeam1Characters(newCharacterData);
   };
 
+  const clearCharacters = () => {
+    setTeam1Characters([]);
+  };
+
   return (
     <div id={'selected_characters' + index}>
       {charactersData.map((chara, index) => {
@@ -52,7 +56,7 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
           );
         }
       })}
-      <input type="image" className={'search-icon'} src={searchIcon} />
+      <input type="image" className={'clear-icon'} src={clearIcon} onClick={clearCharacters} />
     </div>
   );
 };
