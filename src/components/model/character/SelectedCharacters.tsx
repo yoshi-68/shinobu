@@ -34,8 +34,9 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
       {charactersData.map((chara, index) => {
         if (chara) {
           return (
-            <img
+            <input
               key={'selected_characters' + index + '_' + chara.id}
+              type="image"
               className={'selected-chara-icon'}
               src={chara.iconPath}
               onClick={() => removeCharacter(chara.id)}
