@@ -75,7 +75,11 @@ export const SearchResult = (props: SearchRowsProps) => {
             }
           ></img>
         </div>
-        <div className="like">
+        <div className="comment-data">
+          <p>コメント1</p>
+        </div>
+        <div className="post-data">
+          <p className="post-time">2022-12-12 10:00:00</p>
           <input type="image" className={'heart-icon'} src={heartIcon}></input>
           <p className={'like-num'}>12</p>
           <input
@@ -154,7 +158,11 @@ export const SearchResult = (props: SearchRowsProps) => {
             }
           ></img>
         </div>
-        <div className="like">
+        <div className="comment-data">
+          <p>コメント2</p>
+        </div>
+        <div className="post-data">
+          <p className="post-time">2022-12-12 10:00:00</p>
           <input type="image" className={'heart-icon'} src={heartIcon}></input>
           <p className={'like-num'}>12</p>
           <input
@@ -233,7 +241,11 @@ export const SearchResult = (props: SearchRowsProps) => {
             }
           ></img>
         </div>
-        <div className="like">
+        <div className="comment-data">
+          <p>コメント3</p>
+        </div>
+        <div className="post-data">
+          <p className="post-time">2022-12-12 10:00:00</p>
           <input type="image" className={'heart-icon'} src={heartIcon}></input>
           <p className={'like-num'}>12</p>
           <input
@@ -244,6 +256,6 @@ export const SearchResult = (props: SearchRowsProps) => {
           <p className={'like-num'}>1</p>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
