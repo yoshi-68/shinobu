@@ -1,7 +1,7 @@
+import '@/sass/character-select.sass';
+import { BACKWARD_GUARD, FORWARD_GUARD, MIDDLE_GUARD } from '@/settings';
 import { Character, CharacterGroup } from '@types';
 
-import '../../../sass/character-select.sass';
-import { BACKWARD_GUARD, FORWARD_GUARD, MIDDLE_GUARD } from '../../../settings';
 import { CharactersIcon } from './CharacterIcons';
 
 type CharacterSelectProps = {
@@ -78,7 +78,7 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
                 <CharactersIcon
                   key={'charactersIcon' + index}
                   charaData={charaData}
-                  setTeam1Characters={setTeam1Characters}
+                  setTeamCharacters={setTeam1Characters}
                   team1Characters={team1Characters}
                 />
               ))}
@@ -92,7 +92,7 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
               <CharactersIcon
                 key={'charactersIcon' + index}
                 charaData={charaData}
-                setTeam1Characters={setTeam1Characters}
+                setTeamCharacters={setTeam1Characters}
                 team1Characters={team1Characters}
               />
             ))}
@@ -105,7 +105,7 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
               <CharactersIcon
                 key={'charactersIcon' + index}
                 charaData={charaData}
-                setTeam1Characters={setTeam1Characters}
+                setTeamCharacters={setTeam1Characters}
                 team1Characters={team1Characters}
               />
             ))}
@@ -118,7 +118,7 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
               <CharactersIcon
                 key={'charactersIcon' + index}
                 charaData={charaData}
-                setTeam1Characters={setTeam1Characters}
+                setTeamCharacters={setTeam1Characters}
                 team1Characters={team1Characters}
               />
             ))}

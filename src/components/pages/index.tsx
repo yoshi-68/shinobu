@@ -1,4 +1,10 @@
-import { Character, CharacterGroup } from '@types';
+import {
+  Character,
+  CharacterGroup,
+  CharacterIcons,
+  CharacterId,
+  IconPath,
+} from '@types';
 import { useEffect, useState } from 'react';
 
 import { CharacterSearch, CharacterSelect } from '../model/character';
@@ -7,6 +13,9 @@ export const Index = () => {
   const [selectedSearchTabIndex, setSelectedSearchTabIndex] = useState(1);
   const [characterGroup, setCharacterGroup] = useState<Partial<CharacterGroup>>(
     {}
+  );
+  const [characterIcons, setCharacterIcons] = useState<CharacterIcons>(
+    new Map<CharacterId, IconPath>()
   );
 
   // const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
@@ -24,6 +33,9 @@ export const Index = () => {
   useEffect(() => {
     window.electron.getCharaData().then((res: CharacterGroup) => {
       setCharacterGroup(res);
+      res.allTab.forEach((chara) => {
+        characterIcons.set(chara.id, chara.iconPath);
+      });
     });
   }, []);
 
@@ -39,6 +51,7 @@ export const Index = () => {
         setSelectedSearchTabIndex={setSelectedSearchTabIndex}
         team1Characters={team1Characters}
         setTeam1Characters={setTeam1Characters}
+        characterIcons={characterIcons}
       />
     </>
   );

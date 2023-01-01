@@ -138,3 +138,47 @@ $searchCharaTabNonActive: #dd9595
     padding: 0.4rem
     width: 3rem
     height: 3rem
+
+// プルダウンメニュー
+.selectbox-001
+    position: relative
+
+.selectbox-001::before,
+.selectbox-001::after
+    position: absolute
+    content: ''
+    pointer-events: none
+
+.selectbox-001::before
+    right: 0
+    display: inline-block
+    width: 40px
+    height: 40px
+    border-radius: 0 10px 10px 0
+    background-color: #2589d0
+
+.selectbox-001::after
+    position: absolute
+    top: 50%
+    right: 20px
+    transform: translate(50%, -50%) rotate(45deg)
+    width: 5px
+    height: 5px
+    border-bottom: 3px solid #fff
+    border-right: 3px solid #fff
+
+.selectbox-001 select
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    min-width: 100px
+    height: 40px
+    padding: 5px 25px 5px 15px
+    border: none
+    border-radius: 10px
+    background-color: #e6edf3
+    color: #333333
+    cursor: pointer
+
+    &:focus
+        outline: 2px solid #2589d0

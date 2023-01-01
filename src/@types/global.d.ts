@@ -1,4 +1,4 @@
-import { Guards } from 'types';
+import { CharacterGroup, SearchResultOrganizations } from './types';
 
 declare global {
   interface Window {
@@ -7,6 +7,11 @@ declare global {
 }
 
 export interface IElectron {
-  logInfo: (...params: any[]) => void;
-  getCharaData: () => Promise<Guards>;
+  logInfo: (...params: unknown[]) => void;
+  getCharaData: () => Promise<CharacterGroup>;
+  seachOrganizations: (
+    team1Characters: Character[],
+    currentPage: number,
+    sortType: string
+  ) => Promise<SearchResultOrganizations>;
 }

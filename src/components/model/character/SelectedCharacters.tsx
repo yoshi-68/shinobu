@@ -1,8 +1,7 @@
+import clearIcon from '@/images/clear.svg';
+import noSelected from '@/images/no_character.png';
+import { MAX_NUM_CHARA_SELECTION } from '@/settings';
 import { Character } from '@types';
-
-import noSelected from '../../../images/no_character.png';
-import clearIcon from '../../../images/clear.svg';
-import { MAX_NUM_CHARA_SELECTION } from '../../../settings';
 
 type SelectedCharactersProps = {
   index: number;
@@ -43,6 +42,8 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
               type="image"
               className={'selected-chara-icon'}
               src={chara.iconPath}
+              title={chara.name}
+              alt={chara.name}
               onClick={() => removeCharacter(chara.id)}
             />
           );
@@ -56,7 +57,12 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
           );
         }
       })}
-      <input type="image" className={'clear-icon'} src={clearIcon} onClick={clearCharacters} />
+      <input
+        type="image"
+        className={'clear-icon'}
+        src={clearIcon}
+        onClick={clearCharacters}
+      />
     </div>
   );
 };

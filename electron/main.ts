@@ -1,5 +1,5 @@
-import { CharacterGroup } from '@types';
-import { BrowserWindow, app, ipcMain, session } from 'electron';
+import { Character, CharacterGroup, SearchResultOrganizations } from '@types';
+import { BrowserWindow, app, ipcMain } from 'electron';
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS,
@@ -9,6 +9,7 @@ import * as path from 'path';
 import * as url from 'url';
 
 import { getCharaData } from './modules/charaData';
+import { fetchOrganizations } from './modules/fetchOrganizations';
 import { toOneLine } from './modules/format';
 import { MAXIMUM_LOG_FILE_SIZE } from './settings';
 
@@ -17,10 +18,10 @@ const isPackaged = app.isPackaged;
 
 const createWindow = () => {
   const winParam = {
-    width: 800,
+    width: 780,
     height: 1000,
     minHeight: 800,
-    minWidth: 800,
+    minWidth: 780,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -79,17 +80,27 @@ app.whenReady().then(async () => {
   // await installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
 });
 
-const logInfo = (event: Event, ...params: any[]): void =>
-  appLogger.info(...params);
-
 //----------------------------------------
 // IPC通信
 //----------------------------------------
-ipcMain.on('log-info', logInfo);
+ipcMain.on('log-info', (event: Event, ...params: unknown[]): void =>
+  appLogger.info(...params)
+);
 ipcMain.handle(
   'get-chara-data',
   async (event: Event): Promise<CharacterGroup> => {
     const characterGroup = await getCharaData();
     return characterGroup;
+  }
+);
+ipcMain.handle(
+  'search-Organizations',
+  async (
+    event,
+    teamCharacters: Character[],
+    currentPage: number,
+    sortType: string
+  ): Promise<SearchResultOrganizations> => {
+    return await fetchOrganizations(teamCharacters, currentPage, sortType);
   }
 );

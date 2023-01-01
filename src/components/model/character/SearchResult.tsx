@@ -1,261 +1,86 @@
-import atkIcon from '../../../images/atk.png';
-import defIcon from '../../../images/def.png';
-import heartIcon from '../../../images/heart.svg';
-import heartBrakIcon from '../../../images/heartbreak.svg';
+import leftIcon from '@/images/left.svg';
+import rightIcon from '@/images/right.svg';
+import seachIcon from '@/images/search.svg';
+import { Character, CharacterIcons, SearchResultOrganizations } from '@types';
+import { useState } from 'react';
 
-type SearchRowsProps = {};
+import { ShowOrganization } from './ShowOrganization';
+
+type SearchRowsProps = {
+  teamCharacters: Character[];
+  characterIcons: CharacterIcons;
+};
 
 export const SearchResult = (props: SearchRowsProps) => {
+  const { teamCharacters, characterIcons } = props;
+
+  const [sortType, setSortType] = useState('update_datetime desc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(10);
+  const [organizations, setOrganizations] = useState<
+    Partial<SearchResultOrganizations> | undefined
+  >(undefined);
+
+  const seachOrganizations = async (
+    currentPage: number,
+    sortType: string,
+    teamCharacters: Character[]
+  ) => {
+    if (teamCharacters.length > 0) {
+      const result = await window.electron.seachOrganizations(
+        teamCharacters,
+        currentPage,
+        sortType
+      );
+      setMaxPage(Math.ceil(result.num_of_results / 10));
+      setOrganizations(result);
+    }
+  };
+
   return (
     <div className={'chara-search-rows'}>
-      <div id={'search_result' + 1} className={'result-search-group'}>
-        <div>
-          <img className={'atk-icon'} src={atkIcon}></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/3a572c4cfb0eeb77b314e19de84fde97-1.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/ec9aa3dd8bfdfbe37588aae58313e98c.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/1e2cc494f9b1c31acdce7ef3f8a89cd9-1.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/0cd9d03bc1a316c090e60d0f7e564550.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/8479f7b5d739f9951aa29415fe222bf7.png'
-            }
-          ></img>
-        </div>
-        <div>
-          <img className={'def-icon'} src={defIcon}></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2020/03/bd6ab9a2fc55272194d263604d26c1cf.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/09/5a0ed716c7062036b825b98a14c527cd.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/7e24a526cad7c3f429f41d8623e08c4a.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/affa07ed31f5b3e50866b83ec56ec08f.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/1d615e05ca60333b4203ea4fd04ae654.png'
-            }
-          ></img>
-        </div>
-        <div className="comment-data">
-          <p>コメント1</p>
-        </div>
-        <div className="post-data">
-          <p className="post-time">2022-12-12 10:00:00</p>
-          <input type="image" className={'heart-icon'} src={heartIcon}></input>
-          <p className={'like-num'}>12</p>
-          <input
-            type="image"
-            className={'heart-icon'}
-            src={heartBrakIcon}
-          ></input>
-          <p className={'like-num'}>1</p>
-        </div>
+      <div>
+        <label className={'selectbox-001'}>
+          <select onChange={(event) => setSortType(event.target.value)}>
+            <option value={'update_datetime desc'}>時間</option>
+            <option value={'good desc,bad asc,update_datetime desc'}>
+              評価
+            </option>
+          </select>
+        </label>
+        <button
+          type="button"
+          onClick={() =>
+            seachOrganizations(currentPage, sortType, teamCharacters)
+          }
+          disabled={teamCharacters.length <= 0}
+        >
+          <img src={seachIcon} alt="seach" />
+          検索
+        </button>
       </div>
 
-      <div id={'search_result' + 1} className={'result-search-group'}>
-        <div>
-          <img className={'atk-icon'} src={atkIcon}></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/3a572c4cfb0eeb77b314e19de84fde97-1.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/ec9aa3dd8bfdfbe37588aae58313e98c.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/1e2cc494f9b1c31acdce7ef3f8a89cd9-1.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/0cd9d03bc1a316c090e60d0f7e564550.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/8479f7b5d739f9951aa29415fe222bf7.png'
-            }
-          ></img>
-        </div>
-        <div>
-          <img className={'def-icon'} src={defIcon}></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2020/03/bd6ab9a2fc55272194d263604d26c1cf.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/09/5a0ed716c7062036b825b98a14c527cd.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/7e24a526cad7c3f429f41d8623e08c4a.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/affa07ed31f5b3e50866b83ec56ec08f.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/1d615e05ca60333b4203ea4fd04ae654.png'
-            }
-          ></img>
-        </div>
-        <div className="comment-data">
-          <p>コメント2</p>
-        </div>
-        <div className="post-data">
-          <p className="post-time">2022-12-12 10:00:00</p>
-          <input type="image" className={'heart-icon'} src={heartIcon}></input>
-          <p className={'like-num'}>12</p>
-          <input
-            type="image"
-            className={'heart-icon'}
-            src={heartBrakIcon}
-          ></input>
-          <p className={'like-num'}>1</p>
-        </div>
-      </div>
-
-      <div id={'search_result' + 1} className={'result-search-group'}>
-        <div>
-          <img className={'atk-icon'} src={atkIcon}></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/3a572c4cfb0eeb77b314e19de84fde97-1.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/ec9aa3dd8bfdfbe37588aae58313e98c.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/1e2cc494f9b1c31acdce7ef3f8a89cd9-1.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/0cd9d03bc1a316c090e60d0f7e564550.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/8479f7b5d739f9951aa29415fe222bf7.png'
-            }
-          ></img>
-        </div>
-        <div>
-          <img className={'def-icon'} src={defIcon}></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2020/03/bd6ab9a2fc55272194d263604d26c1cf.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/09/5a0ed716c7062036b825b98a14c527cd.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/7e24a526cad7c3f429f41d8623e08c4a.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2018/02/affa07ed31f5b3e50866b83ec56ec08f.png'
-            }
-          ></img>
-          <img
-            className={'result-search-chara-icon'}
-            src={
-              'https://appmedia.jp/wp-content/uploads/2019/08/1d615e05ca60333b4203ea4fd04ae654.png'
-            }
-          ></img>
-        </div>
-        <div className="comment-data">
-          <p>コメント3</p>
-        </div>
-        <div className="post-data">
-          <p className="post-time">2022-12-12 10:00:00</p>
-          <input type="image" className={'heart-icon'} src={heartIcon}></input>
-          <p className={'like-num'}>12</p>
-          <input
-            type="image"
-            className={'heart-icon'}
-            src={heartBrakIcon}
-          ></input>
-          <p className={'like-num'}>1</p>
-        </div>
-      </div>
-    </div >
+      <input
+        type="image"
+        src={leftIcon}
+        alt="back"
+        onClick={() => {
+          if (1 < currentPage) setCurrentPage(currentPage - 1);
+        }}
+      />
+      <input type="text" readOnly value={currentPage + '/' + maxPage} />
+      <input
+        type="image"
+        src={rightIcon}
+        alt="next"
+        onClick={() => {
+          if (currentPage < maxPage) setCurrentPage(currentPage + 1);
+        }}
+      />
+      <ShowOrganization
+        organizations={organizations}
+        characterIcons={characterIcons}
+      />
+    </div>
   );
 };

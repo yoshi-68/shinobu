@@ -1,7 +1,12 @@
-import { Character, SetSelectedSearchTabIndex } from '@types';
+import '@/sass/character-search.sass';
+import { NUMBER_OF_SEARCH_TAB } from '@/settings';
+import {
+  Character,
+  CharacterIcons,
+  SetSelectedSearchTabIndex,
+  SetTeamCharacters,
+} from '@types';
 
-import '../../../sass/character-search.sass';
-import { NUMBER_OF_SEARCH_TAB } from '../../../settings';
 import { SearchPanel } from './SearchPanel';
 import { SearchTabLabel } from './SearchTabLabel';
 import { SearchTabRadio } from './SearchTabRadio';
@@ -10,7 +15,8 @@ type Props = {
   selectedSearchTabIndex: number;
   setSelectedSearchTabIndex: SetSelectedSearchTabIndex;
   team1Characters: Character[];
-  setTeam1Characters: React.Dispatch<React.SetStateAction<Character[]>>;
+  setTeam1Characters: SetTeamCharacters;
+  characterIcons: CharacterIcons;
 };
 
 export const CharacterSearch = (props: Props) => {
@@ -19,6 +25,7 @@ export const CharacterSearch = (props: Props) => {
     setSelectedSearchTabIndex,
     team1Characters,
     setTeam1Characters,
+    characterIcons,
   } = props;
 
   return (
@@ -51,8 +58,9 @@ export const CharacterSearch = (props: Props) => {
               <SearchPanel
                 key={'searchPanel' + index}
                 index={index + 1}
-                team1Characters={team1Characters}
-                setTeam1Characters={setTeam1Characters}
+                teamCharacters={team1Characters}
+                setTeamCharacters={setTeam1Characters}
+                characterIcons={characterIcons}
               />
             );
           })}
