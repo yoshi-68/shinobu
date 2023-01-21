@@ -8,6 +8,6 @@ Node.js v16.18.0
 
 package-lock.json から依存関係をインストールする。
 
-```Shell
+```shell
 npm ci
 ```
