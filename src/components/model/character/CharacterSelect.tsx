@@ -1,17 +1,17 @@
 import '@/sass/character-select.sass';
 import { BACKWARD_GUARD, FORWARD_GUARD, MIDDLE_GUARD } from '@/settings';
-import { Character, CharacterGroup } from '@types';
+import { CharacterGroup, SetTeams, Teams } from '@types';
 
-import { CharactersIcon } from './CharacterIcons';
+import { CharacterIcon } from './CharacterIcons';
 
 type CharacterSelectProps = {
+  selectedSearchTabIndex: number;
   characterGroup: Partial<CharacterGroup>;
-  setTeam1Characters: React.Dispatch<React.SetStateAction<Character[]>>;
-  team1Characters: Character[];
+  setTeams: SetTeams;
 };
 
 export const CharacterSelect = (props: CharacterSelectProps) => {
-  const { characterGroup, setTeam1Characters, team1Characters } = props;
+  const { selectedSearchTabIndex, characterGroup, setTeams } = props;
 
   const allTab = characterGroup.allTab;
   const forwardTab = characterGroup.forwardTab;
@@ -75,11 +75,11 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
           >
             <div id={'allGuards' + 'Characters'}>
               {allTab?.map((charaData, index) => (
-                <CharactersIcon
+                <CharacterIcon
                   key={'charactersIcon' + index}
                   charaData={charaData}
-                  setTeamCharacters={setTeam1Characters}
-                  team1Characters={team1Characters}
+                  selectedSearchTabIndex={selectedSearchTabIndex}
+                  setTeams={setTeams}
                 />
               ))}
             </div>
@@ -89,11 +89,11 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
             className="chara-select-tab-panel chara-select-rows"
           >
             {forwardTab?.map((charaData, index) => (
-              <CharactersIcon
+              <CharacterIcon
                 key={'charactersIcon' + index}
                 charaData={charaData}
-                setTeamCharacters={setTeam1Characters}
-                team1Characters={team1Characters}
+                selectedSearchTabIndex={selectedSearchTabIndex}
+                setTeams={setTeams}
               />
             ))}
           </div>
@@ -102,11 +102,11 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
             className="chara-select-tab-panel chara-select-rows"
           >
             {middleTab?.map((charaData, index) => (
-              <CharactersIcon
+              <CharacterIcon
                 key={'charactersIcon' + index}
                 charaData={charaData}
-                setTeamCharacters={setTeam1Characters}
-                team1Characters={team1Characters}
+                selectedSearchTabIndex={selectedSearchTabIndex}
+                setTeams={setTeams}
               />
             ))}
           </div>
@@ -115,11 +115,11 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
             className="chara-select-tab-panel chara-select-rows"
           >
             {backwardTab?.map((charaData, index) => (
-              <CharactersIcon
+              <CharacterIcon
                 key={'charactersIcon' + index}
                 charaData={charaData}
-                setTeamCharacters={setTeam1Characters}
-                team1Characters={team1Characters}
+                selectedSearchTabIndex={selectedSearchTabIndex}
+                setTeams={setTeams}
               />
             ))}
           </div>

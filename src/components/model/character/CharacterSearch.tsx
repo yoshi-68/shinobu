@@ -1,10 +1,10 @@
 import '@/sass/character-search.sass';
 import { NUMBER_OF_SEARCH_TAB } from '@/settings';
 import {
-  Character,
   CharacterIcons,
   SetSelectedSearchTabIndex,
-  SetTeamCharacters,
+  SetTeams,
+  Teams,
 } from '@types';
 
 import { SearchPanel } from './SearchPanel';
@@ -14,8 +14,8 @@ import { SearchTabRadio } from './SearchTabRadio';
 type Props = {
   selectedSearchTabIndex: number;
   setSelectedSearchTabIndex: SetSelectedSearchTabIndex;
-  team1Characters: Character[];
-  setTeam1Characters: SetTeamCharacters;
+  teams: Teams;
+  setTeams: SetTeams;
   characterIcons: CharacterIcons;
 };
 
@@ -23,8 +23,8 @@ export const CharacterSearch = (props: Props) => {
   const {
     selectedSearchTabIndex,
     setSelectedSearchTabIndex,
-    team1Characters,
-    setTeam1Characters,
+    teams,
+    setTeams,
     characterIcons,
   } = props;
 
@@ -58,8 +58,9 @@ export const CharacterSearch = (props: Props) => {
               <SearchPanel
                 key={'searchPanel' + index}
                 index={index + 1}
-                teamCharacters={team1Characters}
-                setTeamCharacters={setTeam1Characters}
+                selectedSearchTabIndex={selectedSearchTabIndex}
+                team={teams[index]}
+                setTeams={setTeams}
                 characterIcons={characterIcons}
               />
             );

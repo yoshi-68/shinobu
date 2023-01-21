@@ -1,9 +1,9 @@
 import {
-  Character,
   CharacterGroup,
   CharacterIcons,
   CharacterId,
   IconPath,
+  Teams,
 } from '@types';
 import { useEffect, useState } from 'react';
 
@@ -17,24 +17,13 @@ export const Index = () => {
   const [characterIcons, setCharacterIcons] = useState<CharacterIcons>(
     new Map<CharacterId, IconPath>()
   );
-
-  // const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
-
-  const [team1Characters, setTeam1Characters] = useState<Character[]>([]);
-  // const [team2Characters, setTeam2Characters] = useState<number[]>()
-  // const [team3Characters, setTeam3Characters] = useState<number[]>()
-  // const [team4Characters, setTeam4Characters] = useState<number[]>()
-  // const [team5Characters, setTeam5Characters] = useState<number[]>()
-
-  // const onClickAddSelectedSeardhTabIndex = (character: Character) => {
-
-  // }
+  const [teams, setTeams] = useState<Teams>([[], [], [], [], []]);
 
   useEffect(() => {
     window.electron.getCharaData().then((res: CharacterGroup) => {
       setCharacterGroup(res);
       res.allTab.forEach((chara) => {
-        characterIcons.set(chara.id, chara.iconPath);
+        setCharacterIcons(characterIcons.set(chara.id, chara.iconPath));
       });
     });
   }, []);
@@ -42,15 +31,15 @@ export const Index = () => {
   return (
     <>
       <CharacterSelect
+        selectedSearchTabIndex={selectedSearchTabIndex}
         characterGroup={characterGroup}
-        setTeam1Characters={setTeam1Characters}
-        team1Characters={team1Characters}
+        setTeams={setTeams}
       />
       <CharacterSearch
         selectedSearchTabIndex={selectedSearchTabIndex}
         setSelectedSearchTabIndex={setSelectedSearchTabIndex}
-        team1Characters={team1Characters}
-        setTeam1Characters={setTeam1Characters}
+        teams={teams}
+        setTeams={setTeams}
         characterIcons={characterIcons}
       />
     </>

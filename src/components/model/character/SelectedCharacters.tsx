@@ -1,67 +1,74 @@
 import clearIcon from '@/images/clear.svg';
 import noSelected from '@/images/no_character.png';
 import { MAX_NUM_CHARA_SELECTION } from '@/settings';
-import { Character } from '@types';
+import { Character, SetTeams, Team, Teams } from '@types';
 
 type SelectedCharactersProps = {
-  index: number;
-  team1Characters: Character[];
-  setTeam1Characters: React.Dispatch<React.SetStateAction<Character[]>>;
+  selectedSearchTabIndex: number;
+  team: Team;
+  setTeams: SetTeams;
 };
 
 export const SelectedCharacters = (props: SelectedCharactersProps) => {
-  const { index, team1Characters, setTeam1Characters } = props;
-  const charactersData: Character[] = [];
+  const { selectedSearchTabIndex, team, setTeams } = props;
+  const charactersData: Partial<Team> = Array.from(team);
 
   // キャラクターの表示用にキャラクターデータを最大5個コピーする。キャラクターデータがない場合はundefinedで埋める。
-  for (let i = 0; i < MAX_NUM_CHARA_SELECTION; i++) {
-    charactersData.push(team1Characters[i]);
+  for (let i = 0; i < MAX_NUM_CHARA_SELECTION - team.length; i++) {
+    charactersData.push(undefined);
   }
 
-  // キャラクターを右から先頭に隊列順で表示させるため、リバースさせる
-  charactersData.reverse();
-
-  const removeCharacter = (clickId: number) => {
-    const newCharacterData = team1Characters.filter(
-      (charaData) => charaData.id !== clickId
-    );
-    setTeam1Characters(newCharacterData);
+  const onClickRemoveCharacter = (clickId: number) => {
+    // const newCharacterData = team.filter((charaData) => {
+    //   return charaData.id !== clickId;
+    // });
+    // if (newCharacterData.length === 0) return;
+    // setTeams(newCharacterData);
   };
 
-  const clearCharacters = () => {
-    setTeam1Characters([]);
+  const onClickClearCharacters = () => {
+    setTeams((teams) =>
+      teams.map((t, i) => {
+        if (i === selectedSearchTabIndex - 1) {
+          return [];
+        }
+        return t;
+      })
+    );
   };
 
   return (
-    <div id={'selected_characters' + index}>
-      {charactersData.map((chara, index) => {
-        if (chara) {
-          return (
-            <input
-              key={'selected_characters' + index + '_' + chara.id}
-              type="image"
-              className={'selected-chara-icon'}
-              src={chara.iconPath}
-              title={chara.name}
-              alt={chara.name}
-              onClick={() => removeCharacter(chara.id)}
-            />
-          );
-        } else {
-          return (
-            <img
-              key={'selected_characters' + index + '_' + index}
-              className={'selected-chara-icon'}
-              src={noSelected}
-            />
-          );
-        }
-      })}
+    <div className="selected-chara">
+      <div className="selected-chara-icons">
+        {charactersData.map((chara, index) => {
+          if (chara) {
+            return (
+              <input
+                key={'selected_characters' + index + '_' + chara.id}
+                type="image"
+                className={'selected-chara-icon'}
+                src={chara.iconPath}
+                title={chara.name}
+                alt={chara.name}
+                onClick={() => onClickRemoveCharacter(chara.id)}
+              />
+            );
+          } else {
+            return (
+              <img
+                key={'selected_characters' + index + '_' + index}
+                className={'selected-chara-icon'}
+                src={noSelected}
+              />
+            );
+          }
+        })}
+      </div>
       <input
         type="image"
         className={'clear-icon'}
         src={clearIcon}
-        onClick={clearCharacters}
+        onClick={onClickClearCharacters}
       />
     </div>
   );
