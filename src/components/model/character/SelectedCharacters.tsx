@@ -1,7 +1,7 @@
 import clearIcon from '@/images/clear.svg';
 import noSelected from '@/images/no_character.png';
 import { MAX_NUM_CHARA_SELECTION } from '@/settings';
-import { Character, SetTeams, Team, Teams } from '@types';
+import { SetTeams, Team } from '@types';
 
 type SelectedCharactersProps = {
   selectedSearchTabIndex: number;
