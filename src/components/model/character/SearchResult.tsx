@@ -35,7 +35,6 @@ export const SearchResult = (props: SearchRowsProps) => {
       );
 
       setIsSearchResultExist(Number(result.num_of_results) ? true : false);
-      console.log({ isSearchResultExist });
       setIsSearched(true);
       setMaxPage(Math.ceil(result.num_of_results / 10));
       setOrganizations(result);
@@ -55,11 +54,12 @@ export const SearchResult = (props: SearchRowsProps) => {
               </select>
             </label>
             <button
-              type="button"
+              type={'button'}
+              className={'search-btn'}
               onClick={() => seachOrganizations(currentPage, sortType, team)}
               disabled={team.length <= 0}
             >
-              <img src={seachIcon} alt="seach" />
+              <img src={seachIcon} alt={'seach'} />
               検索
             </button>
           </div>
@@ -101,15 +101,20 @@ export const SearchResult = (props: SearchRowsProps) => {
               </select>
             </label>
             <button
-              type="button"
+              type={'button'}
+              className={'search-btn'}
               onClick={() => seachOrganizations(currentPage, sortType, team)}
               disabled={team.length <= 0}
             >
-              <img src={seachIcon} alt="seach" />
+              <img src={seachIcon} alt={'seach'} />
               検索
             </button>
           </div>
-          {!isSearchResultExist && isSearched && <div className='no-result-found'><p>検索結果がありませんでした。</p></div>}
+          {!isSearchResultExist && isSearched && (
+            <div className={'no-result-found'}>
+              <p>検索結果がありませんでした。</p>
+            </div>
+          )}
         </div>
       </>
     );
