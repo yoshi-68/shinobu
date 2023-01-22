@@ -10,7 +10,7 @@ export interface IElectron {
   logInfo: (...params: unknown[]) => void;
   getCharaData: () => Promise<CharacterGroup>;
   seachOrganizations: (
-    team1Characters: Character[],
+    teamCharacters: Character[],
     currentPage: number,
     sortType: string
   ) => Promise<SearchResultOrganizations>;
