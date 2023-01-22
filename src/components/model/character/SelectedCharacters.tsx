@@ -19,19 +19,24 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
   }
 
   const onClickRemoveCharacter = (clickId: number) => {
-    // const newCharacterData = team.filter((charaData) => {
-    //   return charaData.id !== clickId;
-    // });
-    // if (newCharacterData.length === 0) return;
-    // setTeams(newCharacterData);
+    setTeams((teams) =>
+      teams.map((t, i) => {
+        if (i === selectedSearchTabIndex - 1) {
+          return t.filter((charaData) => {
+            return charaData.id !== clickId;
+          });
+        }
+
+        return t;
+      })
+    );
   };
 
   const onClickClearCharacters = () => {
     setTeams((teams) =>
       teams.map((t, i) => {
-        if (i === selectedSearchTabIndex - 1) {
-          return [];
-        }
+        if (i === selectedSearchTabIndex - 1) return [];
+
         return t;
       })
     );
