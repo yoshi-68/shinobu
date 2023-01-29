@@ -1,7 +1,12 @@
-import seachIcon from '@/images/search.svg';
-import { CharacterIcons, SearchResultOrganizations, Team } from '@types';
+import {
+  CharacterIcons,
+  PagingDto,
+  SearchResultOrganizations,
+  Team,
+} from '@types';
 import { useState } from 'react';
 
+import { seachOrganizations } from '../../../functions/seachOrganizations';
 import { Paging } from './Paging';
 import { ShowOrganization } from './ShowOrganization';
 
@@ -22,24 +27,19 @@ export const SearchResult = (props: SearchRowsProps) => {
     Partial<SearchResultOrganizations> | undefined
   >(undefined);
 
-  const seachOrganizations = async (
-    currentPage: number,
-    sortType: string,
-    team: Team
-  ) => {
-    if (team.length > 0) {
-      const result = await window.electron.seachOrganizations(
-        team,
-        currentPage,
-        sortType
-      );
-
-      setIsSearchResultExist(Number(result.num_of_results) ? true : false);
-      setIsSearched(true);
-      setMaxPage(Math.ceil(result.num_of_results / 10));
-      setOrganizations(result);
-    }
+  const pagingDto: PagingDto = {
+    currentPage,
+    sortType,
+    team,
+    maxPage,
+    isSearched,
+    setCurrentPage,
+    setIsSearchResultExist,
+    setIsSearched,
+    setMaxPage,
+    setOrganizations,
   };
+
   if (isSearchResultExist) {
     return (
       <>
@@ -56,20 +56,24 @@ export const SearchResult = (props: SearchRowsProps) => {
             <button
               type={'button'}
               className={'search-btn'}
-              onClick={() => seachOrganizations(currentPage, sortType, team)}
+              onClick={() =>
+                seachOrganizations(
+                  currentPage,
+                  sortType,
+                  team,
+                  setIsSearchResultExist,
+                  setIsSearched,
+                  setMaxPage,
+                  setOrganizations
+                )
+              }
               disabled={team.length <= 0}
             >
-              <img src={seachIcon} alt={'seach'} />
               検索
             </button>
           </div>
           <div>
-            <Paging
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              maxPage={maxPage}
-              isSearched={isSearched}
-            />
+            <Paging pagingDto={pagingDto} />
             {organizations?.result?.map((organization, index) => (
               <ShowOrganization
                 key={'showOrganization_' + index}
@@ -77,12 +81,7 @@ export const SearchResult = (props: SearchRowsProps) => {
                 characterIcons={characterIcons}
               />
             ))}
-            <Paging
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              maxPage={maxPage}
-              isSearched={isSearched}
-            />
+            <Paging pagingDto={pagingDto} />
           </div>
         </div>
       </>
@@ -103,10 +102,19 @@ export const SearchResult = (props: SearchRowsProps) => {
             <button
               type={'button'}
               className={'search-btn'}
-              onClick={() => seachOrganizations(currentPage, sortType, team)}
+              onClick={() =>
+                seachOrganizations(
+                  currentPage,
+                  sortType,
+                  team,
+                  setIsSearchResultExist,
+                  setIsSearched,
+                  setMaxPage,
+                  setOrganizations
+                )
+              }
               disabled={team.length <= 0}
             >
-              <img src={seachIcon} alt={'seach'} />
               検索
             </button>
           </div>

@@ -80,3 +80,24 @@ export type SearchResultOrganizations = {
   num_of_results: number;
   result?: Organization[];
 };
+
+export type SetIsSearchResultExist = React.Dispatch<React.SetStateAction<boolean>>;
+
+export type SetIsSearched = React.Dispatch<React.SetStateAction<boolean>>;
+
+export type SetMaxPage = React.Dispatch<React.SetStateAction<number>>;
+
+export type SetOrganizations = React.Dispatch<React.SetStateAction<Partial<SearchResultOrganizations> | undefined>>;
+
+export type PagingDto = {
+  currentPage: number;
+  sortType: string;
+  team: Team;
+  maxPage: number;
+  isSearched: boolean;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setIsSearchResultExist: SetIsSearchResultExist;
+  setIsSearched: SetIsSearched;
+  setMaxPage: SetMaxPage;
+  setOrganizations: SetOrganizations;
+};

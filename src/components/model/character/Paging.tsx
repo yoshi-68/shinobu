@@ -2,42 +2,44 @@ import leftFillIcon from '@/images/left-fill.svg';
 import leftIcon from '@/images/left.svg';
 import rightFillIcon from '@/images/right-fill.svg';
 import rightIcon from '@/images/right.svg';
+import { PagingDto } from '@types';
 
-type SearchUiProps = {
-  currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  maxPage: number;
-  isSearched: boolean;
-};
+type SearchUiProps = { pagingDto: PagingDto };
 
 export const Paging = (props: SearchUiProps) => {
-  const { currentPage, setCurrentPage, maxPage, isSearched } = props;
-  if (isSearched) {
+  const { pagingDto } = props;
+  if (pagingDto.isSearched) {
     return (
       <>
         <div className="paging">
           <input
             type="image"
             className="paging-allow"
-            src={currentPage > 1 ? leftIcon : leftFillIcon}
+            src={pagingDto.currentPage > 1 ? leftIcon : leftFillIcon}
             alt="back"
             onClick={() => {
-              if (1 < currentPage) setCurrentPage(currentPage - 1);
+              if (1 < pagingDto.currentPage)
+                pagingDto.setCurrentPage(pagingDto.currentPage - 1);
             }}
           />
           <input
             type="text"
             className="paging-number"
             readOnly
-            value={currentPage + '/' + maxPage}
+            value={pagingDto.currentPage + '/' + pagingDto.maxPage}
           />
           <input
             type="image"
             className="paging-allow"
-            src={currentPage < maxPage ? rightIcon : rightFillIcon}
+            src={
+              pagingDto.currentPage < pagingDto.maxPage
+                ? rightIcon
+                : rightFillIcon
+            }
             alt="next"
             onClick={() => {
-              if (currentPage < maxPage) setCurrentPage(currentPage + 1);
+              if (pagingDto.currentPage < pagingDto.maxPage)
+                pagingDto.setCurrentPage(pagingDto.currentPage + 1);
             }}
           />
         </div>
