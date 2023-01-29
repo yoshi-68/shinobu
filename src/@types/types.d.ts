@@ -101,3 +101,13 @@ export type PagingDto = {
   setMaxPage: SetMaxPage;
   setOrganizations: SetOrganizations;
 };
+
+export type SeachOrganizationsDto = {
+  currentPage: number,
+  sortType: string,
+  team: Team,
+  setIsSearchResultExist: SetIsSearchResultExist,
+  setIsSearched: SetIsSearched,
+  setMaxPage: SetMaxPage,
+  setOrganizations: SetOrganizations
+};

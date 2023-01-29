@@ -27,13 +27,23 @@ export const SearchResult = (props: SearchRowsProps) => {
     Partial<SearchResultOrganizations> | undefined
   >(undefined);
 
-  const pagingDto: PagingDto = {
+  const pagingDto = {
     currentPage,
     sortType,
     team,
     maxPage,
     isSearched,
     setCurrentPage,
+    setIsSearchResultExist,
+    setIsSearched,
+    setMaxPage,
+    setOrganizations,
+  };
+
+  const seachOrganizationsDto = {
+    currentPage,
+    sortType,
+    team,
     setIsSearchResultExist,
     setIsSearched,
     setMaxPage,
@@ -56,17 +66,7 @@ export const SearchResult = (props: SearchRowsProps) => {
             <button
               type={'button'}
               className={'search-btn'}
-              onClick={() =>
-                seachOrganizations(
-                  currentPage,
-                  sortType,
-                  team,
-                  setIsSearchResultExist,
-                  setIsSearched,
-                  setMaxPage,
-                  setOrganizations
-                )
-              }
+              onClick={() => seachOrganizations(seachOrganizationsDto)}
               disabled={team.length <= 0}
             >
               検索
@@ -102,17 +102,7 @@ export const SearchResult = (props: SearchRowsProps) => {
             <button
               type={'button'}
               className={'search-btn'}
-              onClick={() =>
-                seachOrganizations(
-                  currentPage,
-                  sortType,
-                  team,
-                  setIsSearchResultExist,
-                  setIsSearched,
-                  setMaxPage,
-                  setOrganizations
-                )
-              }
+              onClick={() => seachOrganizations(seachOrganizationsDto)}
               disabled={team.length <= 0}
             >
               検索
