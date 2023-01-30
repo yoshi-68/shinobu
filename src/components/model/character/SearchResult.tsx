@@ -6,7 +6,7 @@ import {
 } from '@types';
 import { useState } from 'react';
 
-import { seachOrganizations } from '../../../functions/seachOrganizations';
+import { seachOrganizations } from '@/functions/seachOrganizations';
 import { Paging } from './Paging';
 import { ShowOrganization } from './ShowOrganization';
 
