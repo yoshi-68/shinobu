@@ -1,14 +1,23 @@
+import { seachOrganizations } from '@/functions/seachOrganizations';
 import {
   CharacterIcons,
   PagingDto,
+  SeachOrganizationsDto,
   SearchResultOrganizations,
   Team,
 } from '@types';
 import { useState } from 'react';
 
-import { seachOrganizations } from '@/functions/seachOrganizations';
 import { Paging } from './Paging';
 import { ShowOrganization } from './ShowOrganization';
+
+const clickSearch = (
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+  dto: SeachOrganizationsDto
+) => {
+  setCurrentPage((state) => 1);
+  seachOrganizations(dto);
+};
 
 type SearchRowsProps = {
   team: Team;
@@ -19,33 +28,32 @@ export const SearchResult = (props: SearchRowsProps) => {
   const { team, characterIcons } = props;
 
   const [sortType, setSortType] = useState('update_datetime desc');
-  const [isSearched, setIsSearched] = useState(false);
+  const [searchedTeam, setSearchedTeam] = useState<Team | undefined>(undefined);
   const [isSearchResultExist, setIsSearchResultExist] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
   const [organizations, setOrganizations] = useState<
-    Partial<SearchResultOrganizations> | undefined
+    SearchResultOrganizations | undefined
   >(undefined);
 
-  const pagingDto = {
+  const seachOrganizationsDto: SeachOrganizationsDto = {
     currentPage,
     sortType,
     team,
-    maxPage,
-    isSearched,
-    setCurrentPage,
+    setSearchedTeam,
     setIsSearchResultExist,
-    setIsSearched,
     setMaxPage,
     setOrganizations,
   };
 
-  const seachOrganizationsDto = {
+  const pagingDto: PagingDto = {
     currentPage,
     sortType,
-    team,
+    maxPage,
+    searchedTeam,
+    setSearchedTeam,
+    setCurrentPage,
     setIsSearchResultExist,
-    setIsSearched,
     setMaxPage,
     setOrganizations,
   };
@@ -66,7 +74,7 @@ export const SearchResult = (props: SearchRowsProps) => {
             <button
               type={'button'}
               className={'search-btn'}
-              onClick={() => seachOrganizations(seachOrganizationsDto)}
+              onClick={() => clickSearch(setCurrentPage, seachOrganizationsDto)}
               disabled={team.length <= 0}
             >
               検索
@@ -102,13 +110,13 @@ export const SearchResult = (props: SearchRowsProps) => {
             <button
               type={'button'}
               className={'search-btn'}
-              onClick={() => seachOrganizations(seachOrganizationsDto)}
+              onClick={() => clickSearch(setCurrentPage, seachOrganizationsDto)}
               disabled={team.length <= 0}
             >
               検索
             </button>
           </div>
-          {!isSearchResultExist && isSearched && (
+          {!isSearchResultExist && searchedTeam && (
             <div className={'no-result-found'}>
               <p>検索結果がありませんでした。</p>
             </div>

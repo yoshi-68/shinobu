@@ -1,14 +1,43 @@
+import { seachOrganizations } from '@/functions/seachOrganizations';
 import leftFillIcon from '@/images/left-fill.svg';
 import leftIcon from '@/images/left.svg';
 import rightFillIcon from '@/images/right-fill.svg';
 import rightIcon from '@/images/right.svg';
-import { PagingDto } from '@types';
+import { PagingDto, SeachOrganizationsDto } from '@types';
 
-type SearchUiProps = { pagingDto: PagingDto };
+const movePage = async (paginationType: 'prev' | 'next', dto: PagingDto) => {
+  const seachOrganizationsDto: SeachOrganizationsDto = {
+    currentPage: dto.currentPage,
+    sortType: dto.sortType,
+    team: dto.searchedTeam!,
+    setSearchedTeam: dto.setSearchedTeam,
+    setIsSearchResultExist: dto.setIsSearchResultExist,
+    setMaxPage: dto.setMaxPage,
+    setOrganizations: dto.setOrganizations,
+  };
 
-export const Paging = (props: SearchUiProps) => {
+  if (paginationType === 'prev') {
+    if (dto.currentPage <= 1) return;
+    dto.setCurrentPage((currentPage) => {
+      seachOrganizationsDto.currentPage = currentPage - 1;
+      seachOrganizations(seachOrganizationsDto);
+      return seachOrganizationsDto.currentPage;
+    });
+  } else {
+    if (dto.maxPage <= dto.currentPage) return;
+    dto.setCurrentPage((currentPage) => {
+      seachOrganizationsDto.currentPage = currentPage + 1;
+      seachOrganizations(seachOrganizationsDto);
+      return seachOrganizationsDto.currentPage;
+    });
+  }
+};
+
+type PagingProps = { pagingDto: PagingDto };
+
+export const Paging = (props: PagingProps) => {
   const dto = props.pagingDto;
-  if (dto.isSearched) {
+  if (dto.searchedTeam) {
     return (
       <>
         <div className="paging">
@@ -17,9 +46,7 @@ export const Paging = (props: SearchUiProps) => {
             className="paging-allow"
             src={dto.currentPage > 1 ? leftIcon : leftFillIcon}
             alt="back"
-            onClick={() => {
-              if (1 < dto.currentPage) dto.setCurrentPage(dto.currentPage - 1);
-            }}
+            onClick={() => movePage('prev', dto)}
           />
           <input
             type="text"
@@ -32,10 +59,7 @@ export const Paging = (props: SearchUiProps) => {
             className="paging-allow"
             src={dto.currentPage < dto.maxPage ? rightIcon : rightFillIcon}
             alt="next"
-            onClick={() => {
-              if (dto.currentPage < dto.maxPage)
-                dto.setCurrentPage(dto.currentPage + 1);
-            }}
+            onClick={() => movePage('next', dto)}
           />
         </div>
       </>
