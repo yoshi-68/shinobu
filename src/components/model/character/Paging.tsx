@@ -18,14 +18,14 @@ const movePage = async (paginationType: 'prev' | 'next', dto: PagingDto) => {
 
   if (paginationType === 'prev') {
     if (dto.currentPage <= 1) return;
-    dto.setCurrentPage((currentPage) => {
+    dto.setCurrentPage(currentPage => {
       seachOrganizationsDto.currentPage = currentPage - 1;
       seachOrganizations(seachOrganizationsDto);
       return seachOrganizationsDto.currentPage;
     });
   } else {
     if (dto.maxPage <= dto.currentPage) return;
-    dto.setCurrentPage((currentPage) => {
+    dto.setCurrentPage(currentPage => {
       seachOrganizationsDto.currentPage = currentPage + 1;
       seachOrganizations(seachOrganizationsDto);
       return seachOrganizationsDto.currentPage;

@@ -10,7 +10,7 @@ export const seachOrganizations = async (dto: SeachOrganizationsDto) => {
   );
 
   dto.setIsSearchResultExist(Number(result.num_of_results) ? true : false);
+  dto.setOrganizations(result);
   dto.setSearchedTeam([...dto.team]);
   dto.setMaxPage(Math.ceil(result.num_of_results / 10));
-  dto.setOrganizations(result);
 };
