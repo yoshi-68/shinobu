@@ -14,6 +14,7 @@ const movePage = async (paginationType: 'prev' | 'next', dto: PagingDto) => {
     setIsSearchResultExist: dto.setIsSearchResultExist,
     setMaxPage: dto.setMaxPage,
     setOrganizations: dto.setOrganizations,
+    setIsDisabledSeach: dto.setIsDisabledSeach,
   };
 
   if (paginationType === 'prev') {
@@ -34,7 +35,6 @@ const movePage = async (paginationType: 'prev' | 'next', dto: PagingDto) => {
 };
 
 type PagingProps = { pagingDto: PagingDto };
-
 export const Paging = (props: PagingProps) => {
   const dto = props.pagingDto;
   if (dto.searchedTeam) {
@@ -47,6 +47,7 @@ export const Paging = (props: PagingProps) => {
             src={dto.currentPage > 1 ? leftIcon : leftFillIcon}
             alt="back"
             onClick={() => movePage('prev', dto)}
+            disabled={dto.isDisabledSeach}
           />
           <input
             type="text"
@@ -60,6 +61,7 @@ export const Paging = (props: PagingProps) => {
             src={dto.currentPage < dto.maxPage ? rightIcon : rightFillIcon}
             alt="next"
             onClick={() => movePage('next', dto)}
+            disabled={dto.isDisabledSeach}
           />
         </div>
       </>

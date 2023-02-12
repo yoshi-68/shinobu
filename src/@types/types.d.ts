@@ -77,6 +77,7 @@ export type SetOrganizations = React.Dispatch<
 export type SetSearchTeam = React.Dispatch<
   React.SetStateAction<Team | undefined>
 >;
+export type SetIsDisabledSeach = React.Dispatch<React.SetStateAction<boolean>>;
 export type SeachOrganizationsDto = {
   currentPage: number;
   sortType: string;
@@ -85,15 +86,18 @@ export type SeachOrganizationsDto = {
   setIsSearchResultExist: SetIsSearchResultExist;
   setMaxPage: SetMaxPage;
   setOrganizations: SetOrganizations;
+  setIsDisabledSeach: SetIsDisabledSeach;
 };
 export type PagingDto = {
   currentPage: number;
   sortType: string;
   maxPage: number;
   searchedTeam?: Team;
+  isDisabledSeach: boolean;
   setSearchedTeam: SetSearchTeam;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   setIsSearchResultExist: SetIsSearchResultExist;
   setMaxPage: SetMaxPage;
   setOrganizations: SetOrganizations;
+  setIsDisabledSeach: SetIsDisabledSeach;
 };
