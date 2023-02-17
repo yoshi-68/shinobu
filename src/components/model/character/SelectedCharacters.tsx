@@ -64,6 +64,7 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
                 key={'selected_characters' + index + '_' + index}
                 className={'selected-chara-icon'}
                 src={noSelected}
+                alt={'No Selected'}
               />
             );
           }
@@ -73,6 +74,7 @@ export const SelectedCharacters = (props: SelectedCharactersProps) => {
         type="image"
         className={'clear-icon'}
         src={clearIcon}
+        alt={'clear'}
         onClick={onClickClearCharacters}
       />
     </div>

@@ -1,6 +1,6 @@
 import '@/sass/character-select.sass';
 import { BACKWARD_GUARD, FORWARD_GUARD, MIDDLE_GUARD } from '@/settings';
-import { CharacterGroup, SetTeams, Teams } from '@types';
+import { CharacterGroup, SetTeams } from '@types';
 
 import { CharacterIcon } from './CharacterIcons';
 
@@ -73,10 +73,10 @@ export const CharacterSelect = (props: CharacterSelectProps) => {
             id="chara_select_tab1"
             className="chara-select-tab-panel chara-select-rows"
           >
-            <div id={'allGuards' + 'Characters'}>
+            <div id={'allGuardsCharacters'}>
               {allTab?.map((charaData, index) => (
                 <CharacterIcon
-                  key={'charactersIcon' + index}
+                  key={`charactersIcon${index}`}
                   charaData={charaData}
                   selectedSearchTabIndex={selectedSearchTabIndex}
                   setTeams={setTeams}

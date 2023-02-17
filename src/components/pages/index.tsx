@@ -26,7 +26,7 @@ export const Index = () => {
         setCharacterIcons(characterIcons.set(chara.id, chara.iconPath));
       });
     });
-  }, []);
+  }, [characterIcons]);
 
   return (
     <>

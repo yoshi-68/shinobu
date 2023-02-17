@@ -18,49 +18,59 @@ export const ShowOrganization = (props: ShowOrganizationProps) => {
       <>
         <div className={'search-result-organization'}>
           <div className={'search-result-attackers'}>
-            <img className={'atk-icon'} src={atkIcon} />
+            <img className={'atk-icon'} src={atkIcon} alt={'attack'} />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.atk_id_1))}
+              alt={'attack1'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.atk_id_2))}
+              alt={'attack2'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.atk_id_3))}
+              alt={'attack3'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.atk_id_4))}
+              alt={'attack4'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.atk_id_5))}
+              alt={'attack5'}
             />
           </div>
           <div className={'search-result-defender'}>
-            <img className={'def-icon'} src={defIcon} />
+            <img className={'def-icon'} src={defIcon} alt={'defence'} />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.def_id_1))}
+              alt={'defence1'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.def_id_2))}
+              alt={'defence2'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.def_id_3))}
+              alt={'defence3'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.def_id_4))}
+              alt={'defence4'}
             />
             <img
               className={'search-result-chara-icon'}
               src={characterIcons.get(Number(organization.def_id_5))}
+              alt={'defence5'}
             />
           </div>
           <div className="comment">
@@ -72,9 +82,15 @@ export const ShowOrganization = (props: ShowOrganizationProps) => {
               type="image"
               className={'heart-icon'}
               src={heartIcon}
+              alt={'good'}
             ></input>
             <p className={'like-num'}>{organization.good}</p>
-            <input type="image" className={'heart-icon'} src={heartBrakIcon} />
+            <input
+              type="image"
+              className={'heart-icon'}
+              src={heartBrakIcon}
+              alt={'bad'}
+            />
             <p className={'like-num'}>{organization.bad}</p>
           </div>
         </div>
