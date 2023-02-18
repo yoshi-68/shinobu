@@ -17,7 +17,7 @@
 ## アプリのアンインストール
 
 1. アプリと機能からシノブ選択して、アンインストールをする。
-1. C:\Users\yoshi\AppData\Roaming のシノブフォルダを削除する。
+1. %USERNAME%\AppData\Roaming のシノブフォルダを削除する。
 
 # 開発方法
 
