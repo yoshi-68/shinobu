@@ -122,7 +122,7 @@ ipcMain.handle(
 );
 
 /**
- * 防衛突破編成の検索を行う
+ * 防衛突破編成の検索を行う。
  *
  * @returns {Promise<SearchResultOrganizations>} 防衛突破編成の結果
  */
