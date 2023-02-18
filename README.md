@@ -34,7 +34,7 @@ npm run dev
 
 # デプロイ
 
-Windows のインストーラ（シノブ Setup~.exe）を作成する。
+dist 配下に Windows のインストーラ（シノブ Setup~.exe）を作成する。
 
 ```shell
 npm run electron:build:nis
