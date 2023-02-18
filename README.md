@@ -32,7 +32,7 @@ package.json の scripts にコマンド一覧がある。
 npm run dev
 ```
 
-## インストーラーの作成
+## デプロイ
 
 Windows のインストーラ（シノブ Setup~.exe）を作成する。
 
