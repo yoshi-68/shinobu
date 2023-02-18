@@ -1,5 +1,5 @@
 /**
- * ログファイルのサイズ
+ * ログのファイルサイズ
  */
 export const MAXIMUM_LOG_FILE_SIZE = 524288;
 
