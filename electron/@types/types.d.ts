@@ -1,3 +1,6 @@
+/**
+ * キャラクタ情報
+ */
 export type Character = {
   id: number;
   name: string;
@@ -6,6 +9,10 @@ export type Character = {
   orderFormation: number;
 };
 
+/**
+ * 選択できるキャラクタ情報
+ * 前衛・中衛・後衛・全てのグループに分ける。
+ */
 export type CharacterGroup = {
   allTab: Character[];
   forwardTab: Character[];
@@ -13,6 +20,9 @@ export type CharacterGroup = {
   backwardTab: Character[];
 };
 
+/**
+ * 防衛突破編成の結果
+ */
 export type SearchResultOrganizations = {
   num_of_results: number;
   result?: [
@@ -56,6 +66,9 @@ export type SearchResultOrganizations = {
   ];
 };
 
+/**
+ * 防衛突破編成の検索条件
+ */
 export type FetchOrganizationsRequest = {
   time_limit: string;
   sort_by: string;
