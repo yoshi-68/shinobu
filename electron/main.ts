@@ -16,20 +16,33 @@ import { MAXIMUM_LOG_FILE_SIZE } from './settings';
 appLogger.transports.file.maxSize = MAXIMUM_LOG_FILE_SIZE;
 const isPackaged = app.isPackaged;
 
-const gotTheLock = app.requestSingleInstanceLock();
+/**
+ * 多重起動をさせない。
+ * すでにアプリを起動している場合は、そのアプリにフォーカスを合わせる。
+ */
+const detectionOfMultipleActivations = () => {
+  const gotTheLock = app.requestSingleInstanceLock();
 
-if (!gotTheLock) {
-  app.quit();
-} else {
-  app.on('second-instance', (event, commandLine, workingDirectory) => {
-    const mainWindow = BrowserWindow.getAllWindows()[0];
-    const args = commandLine.slice(1);
-    mainWindow.webContents.send('args', args);
-    if (mainWindow.isMinimized()) mainWindow.restore();
-    mainWindow.focus();
-  });
-}
+  if (!gotTheLock) {
+    app.quit();
+  } else {
+    app.on('second-instance', (event, commandLine, workingDirectory) => {
+      const mainWindow = BrowserWindow.getAllWindows()[0];
+      const args = commandLine.slice(1);
+      mainWindow.webContents.send('args', args);
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    });
+  }
+};
 
+detectionOfMultipleActivations(); // 多重起動をさせない。
+
+/**
+ * アプリのウインドウを生成する。
+ *
+ * @returns {void}
+ */
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 780,
@@ -45,8 +58,6 @@ const createWindow = () => {
 
   appLogger.info('ウインドウ生成の情報:', toOneLine(win.getBounds()));
 
-  appLogger.info('ウインドウ生成の情報:', toOneLine(win.getBounds()));
-
   const appURL = isPackaged
     ? url.pathToFileURL(path.join(__dirname, '../index.html')).toString()
     : 'http://localhost:3000';
@@ -56,9 +67,14 @@ const createWindow = () => {
 
   if (!isPackaged) {
     win.webContents.openDevTools();
+    // React Developer Toolsのインストールに時間がかかるので、注意が必要。
+    // installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
   }
 };
 
+//----------------------------------------
+// アプリのイベントハンドラ
+//----------------------------------------
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     appLogger.info(
@@ -85,17 +101,15 @@ app.whenReady().then(async () => {
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
-
-  /*
-   * DevToolのショートカットキー: Ctrl + Shift + I
-   * パッケージングの際はコメントアウトをする
-   */
-  // await installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
 });
 
 //----------------------------------------
 // IPC通信
 //----------------------------------------
+
+/**
+ * ログのinfoレベルを出力する。
+ */
 ipcMain.on('log-info', (event: Event, ...params: unknown[]): void =>
   appLogger.info(...params)
 );
@@ -106,6 +120,12 @@ ipcMain.handle(
     return characterGroup;
   }
 );
+
+/**
+ * 防衛突破編成の検索を行う
+ *
+ * @returns {Promise<SearchResultOrganizations>} 防衛突破編成の結果
+ */
 ipcMain.handle(
   'search-Organizations',
   async (
