@@ -16,8 +16,22 @@ import { MAXIMUM_LOG_FILE_SIZE } from './settings';
 appLogger.transports.file.maxSize = MAXIMUM_LOG_FILE_SIZE;
 const isPackaged = app.isPackaged;
 
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    const mainWindow = BrowserWindow.getAllWindows()[0];
+    const args = commandLine.slice(1);
+    mainWindow.webContents.send('args', args);
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  });
+}
+
 const createWindow = () => {
-  const winParam = {
+  const win = new BrowserWindow({
     width: 780,
     height: 1000,
     minHeight: 800,
@@ -26,25 +40,23 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-  };
+    autoHideMenuBar: true,
+  });
 
-  const win = new BrowserWindow(winParam);
-  win.setMenuBarVisibility(false); //画面上部のメニューを削除する
+  appLogger.info('ウインドウ生成の情報:', toOneLine(win.getBounds()));
 
-  appLogger.info('ウインドウ生成の情報:', toOneLine(winParam));
+  appLogger.info('ウインドウ生成の情報:', toOneLine(win.getBounds()));
 
   const appURL = isPackaged
-    ? url.format({
-        pathname: path.join(__dirname, '../index.html'),
-        protocol: 'file:',
-        slashes: true,
-      })
+    ? url.pathToFileURL(path.join(__dirname, '../index.html')).toString()
     : 'http://localhost:3000';
-
-  if (!isPackaged) win.webContents.openDevTools();
 
   win.loadURL(appURL);
   appLogger.info('ウインドウ生成が完了');
+
+  if (!isPackaged) {
+    win.webContents.openDevTools();
+  }
 };
 
 app.on('window-all-closed', () => {
