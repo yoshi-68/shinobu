@@ -14,7 +14,10 @@
 
 ## バージョン
 
-Node.js v16.18.0
+- Node.js v16.18.0
+- React v18.2.0
+- Electron v23.1.0
+- Typescript v4.9.5
 
 ## インストール
 
