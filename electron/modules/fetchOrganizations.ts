@@ -9,6 +9,14 @@ import * as superagent from 'superagent';
 import { FEATCH_ORGANIZATIONS, USER_AGENT } from '../settings';
 import { toOneLine } from './format';
 
+/**
+ * 防衛突破編成の検索のリクエストを生成する。
+ *
+ * @param {Character[]} teamCharacters 検索する防衛突破編成
+ * @param {number} currentPage 検索するページ番号
+ * @param {string} sortType ソートの種類
+ * @returns リクエスト
+ */
 const createRequest = (
   teamCharacters: Character[],
   currentPage: number,
@@ -30,6 +38,14 @@ const createRequest = (
   return request;
 };
 
+/**
+ * 防衛突破編成の検索のリクエストを生成する。
+ *
+ * @param {Character[]} teamCharacters 検索する防衛突破編成
+ * @param {number} currentPage 検索するページ番号
+ * @param {string} sortType ソートの種類
+ * @returns 防衛突破編成の検索結果
+ */
 export const fetchOrganizations = async (
   teamCharacters: Character[],
   currentPage: number,

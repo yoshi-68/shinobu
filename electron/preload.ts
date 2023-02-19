@@ -1,6 +1,9 @@
 import { Character, CharacterGroup, SearchResultOrganizations } from '@types';
 import { contextBridge, ipcRenderer } from 'electron';
 
+/**
+ * Node.jsのAPIへのアクセスを登録する
+ */
 contextBridge.exposeInMainWorld('electron', {
   logInfo: (...params: unknown[]): void => {
     ipcRenderer.send('log-info', ...params);
