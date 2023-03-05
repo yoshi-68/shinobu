@@ -23,9 +23,9 @@
 
 ## バージョン
 
-- Node.js v16.18.0
+- Node.js v16.18.1
 - React v18.2.0
-- Electron v23.1.0
+- Electron v23.1.2
 - Typescript v4.9.5
 
 ## インストール
@@ -38,7 +38,11 @@ npm ci
 
 ## プログラムの実行
 
-package.json の scripts にコマンド一覧がある。
+ビルドしてから、プログラムを実行する。
+
+```shell
+npm run build
+```
 
 ```shell
 npm run dev

@@ -1,9 +1,9 @@
 import { Character, CharacterGroup, SearchResultOrganizations } from '@types';
 import { BrowserWindow, app, ipcMain } from 'electron';
-import installExtension, {
-  REACT_DEVELOPER_TOOLS,
-  REDUX_DEVTOOLS,
-} from 'electron-devtools-installer';
+// import installExtension, {
+//   REACT_DEVELOPER_TOOLS,
+//   REDUX_DEVTOOLS,
+// } from 'electron-devtools-installer';
 import * as appLogger from 'electron-log';
 import * as path from 'path';
 import * as url from 'url';
@@ -26,7 +26,7 @@ const detectionOfMultipleActivations = () => {
   if (!gotTheLock) {
     app.quit();
   } else {
-    app.on('second-instance', (event, commandLine, workingDirectory) => {
+    app.on('second-instance', (event, commandLine) => {
       const mainWindow = BrowserWindow.getAllWindows()[0];
       const args = commandLine.slice(1);
       mainWindow.webContents.send('args', args);
@@ -52,6 +52,7 @@ const createWindow = () => {
     icon: path.join(__dirname, '../icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      devTools: true,
     },
     autoHideMenuBar: true,
   });
@@ -66,7 +67,9 @@ const createWindow = () => {
   appLogger.info('ウインドウ生成が完了');
 
   if (!isPackaged) {
-    win.webContents.openDevTools();
+    win.on('ready-to-show', () => {
+      win.webContents.openDevTools();
+    });
     // React Developer Toolsのインストールに時間がかかるので、注意が必要。
     // installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
   }
@@ -76,12 +79,11 @@ const createWindow = () => {
 // アプリのイベントハンドラ
 //----------------------------------------
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    appLogger.info(
-      `********** アプリケーション終了: version ${app.getVersion()} **********`
-    );
-    app.quit();
-  }
+  if (process.platform !== 'darwin') return;
+  appLogger.info(
+    `********** アプリケーション終了: version ${app.getVersion()} **********`
+  );
+  app.quit();
 });
 
 process.on('uncaughtException', (error: Error) => {
@@ -113,13 +115,9 @@ app.whenReady().then(async () => {
 ipcMain.on('log-info', (event: Event, ...params: unknown[]): void =>
   appLogger.info(...params)
 );
-ipcMain.handle(
-  'get-chara-data',
-  async (event: Event): Promise<CharacterGroup> => {
-    const characterGroup = await getCharaData();
-    return characterGroup;
-  }
-);
+ipcMain.handle('get-chara-data', async (): Promise<CharacterGroup> => {
+  return await getCharaData();
+});
 
 /**
  * 防衛突破編成の検索を行う。
