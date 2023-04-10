@@ -30,7 +30,7 @@
 
 ## インストール
 
-package-lock.json から依存関係をインストールする。
+`package-lock.json`からパッケージをインストールする。
 
 ```shell
 npm ci
@@ -48,7 +48,7 @@ npm run build
 npm run dev
 ```
 
-# デプロイ
+# exeファイルを作成
 
 dist 配下に Windows のインストーラ（シノブ Setup~.exe）を作成する。
 
