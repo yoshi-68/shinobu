@@ -4,4 +4,4 @@
  * @param {string} json JSON
  * @returns {string } 1行のJSON
  */
-export const toOneLine = (json) => JSON.stringify(json).replace(/\s+/g, '');
+export const toOneLine = (json) => JSON.stringify(json, null, 0);

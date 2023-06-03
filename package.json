@@ -1,7 +1,7 @@
 {
   "name": "shinobu",
   "productName": "シノブ",
-  "version": "1.0.0",
+  "version": "v1.0.1",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",

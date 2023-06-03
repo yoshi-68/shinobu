@@ -1,17 +1,17 @@
-import { Character, CharacterGroup, SearchResultOrganizations } from '@types';
-import { BrowserWindow, app, ipcMain } from 'electron';
+import { Character, CharacterGroup, SearchResultOrganizations } from "@types";
+import { BrowserWindow, app, ipcMain } from "electron";
 // import installExtension, {
 //   REACT_DEVELOPER_TOOLS,
 //   REDUX_DEVTOOLS,
 // } from 'electron-devtools-installer';
-import * as appLogger from 'electron-log';
-import * as path from 'path';
-import * as url from 'url';
+import * as appLogger from "electron-log";
+import * as path from "path";
+import * as url from "url";
 
-import { getCharaData } from './modules/charaData';
-import { fetchOrganizations } from './modules/fetchOrganizations';
-import { toOneLine } from './modules/format';
-import { MAXIMUM_LOG_FILE_SIZE } from './settings';
+import { getCharaData } from "./modules/charaData";
+import { fetchOrganizations } from "./modules/fetchOrganizations";
+import { toOneLine } from "./modules/format";
+import { MAXIMUM_LOG_FILE_SIZE } from "./settings";
 
 appLogger.transports.file.maxSize = MAXIMUM_LOG_FILE_SIZE;
 const isPackaged = app.isPackaged;
@@ -23,17 +23,21 @@ const isPackaged = app.isPackaged;
 const detectionOfMultipleActivations = () => {
   const gotTheLock = app.requestSingleInstanceLock();
 
-  if (!gotTheLock) {
-    app.quit();
-  } else {
-    app.on('second-instance', (event, commandLine) => {
-      const mainWindow = BrowserWindow.getAllWindows()[0];
-      const args = commandLine.slice(1);
-      mainWindow.webContents.send('args', args);
-      if (mainWindow.isMinimized()) mainWindow.restore();
-      mainWindow.focus();
-    });
-  }
+  if (!gotTheLock) app.quit();
+
+  app.on("second-instance", (event, commandLine) => {
+    let mainWindow = BrowserWindow.getAllWindows()[0];
+
+    if (!mainWindow) {
+      // 既存のウィンドウがない場合は新しいウィンドウを作成する
+      mainWindow = createWindow();
+    }
+
+    const args = commandLine.slice(1);
+    mainWindow.webContents.send("args", args);
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  });
 };
 
 detectionOfMultipleActivations(); // 多重起動をさせない。
@@ -46,48 +50,50 @@ detectionOfMultipleActivations(); // 多重起動をさせない。
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 780,
-    height: 1000,
+    height: 800,
     minHeight: 800,
     minWidth: 780,
-    icon: path.join(__dirname, '../icon.png'),
+    icon: path.join(__dirname, "../icon.png"),
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      devTools: true,
+      preload: path.join(__dirname, "preload.js"),
+      devTools: true
     },
-    autoHideMenuBar: true,
+    autoHideMenuBar: true
   });
 
-  appLogger.info('ウインドウ生成の情報:', toOneLine(win.getBounds()));
+  appLogger.info("ウインドウ生成の情報:", toOneLine(win.getBounds()));
 
   const appURL = isPackaged
-    ? url.pathToFileURL(path.join(__dirname, '../index.html')).toString()
-    : 'http://localhost:3000';
+    ? url.pathToFileURL(path.join(__dirname, "../index.html")).toString()
+    : "http://localhost:3000";
 
   win.loadURL(appURL);
-  appLogger.info('ウインドウ生成が完了');
+  appLogger.info("ウインドウ生成が完了");
 
   if (!isPackaged) {
-    win.on('ready-to-show', () => {
+    win.on("ready-to-show", () => {
       win.webContents.openDevTools();
     });
     // React Developer Toolsのインストールに時間がかかるので、注意が必要。
     // installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]);
   }
+
+  return win;
 };
 
 //----------------------------------------
 // アプリのイベントハンドラ
 //----------------------------------------
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') return;
+app.on("window-all-closed", () => {
   appLogger.info(
     `********** アプリケーション終了: version ${app.getVersion()} **********`
   );
+  if (process.platform !== "darwin") return;
   app.quit();
 });
 
-process.on('uncaughtException', (error: Error) => {
-  appLogger.error('予期しないエラーが発生:', error);
+process.on("uncaughtException", (error: Error) => {
+  appLogger.error("予期しないエラーが発生:", error);
   appLogger.error(
     `********** アプリケーション異常終了: version ${app.getVersion()} **********`
   );
@@ -100,7 +106,7 @@ app.whenReady().then(async () => {
   );
 
   createWindow();
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
@@ -112,10 +118,10 @@ app.whenReady().then(async () => {
 /**
  * ログのinfoレベルを出力する。
  */
-ipcMain.on('log-info', (event: Event, ...params: unknown[]): void =>
+ipcMain.on("log-info", (event: Event, ...params: unknown[]): void =>
   appLogger.info(...params)
 );
-ipcMain.handle('get-chara-data', async (): Promise<CharacterGroup> => {
+ipcMain.handle("get-chara-data", async (): Promise<CharacterGroup> => {
   return await getCharaData();
 });
 
@@ -125,7 +131,7 @@ ipcMain.handle('get-chara-data', async (): Promise<CharacterGroup> => {
  * @returns {Promise<SearchResultOrganizations>} 防衛突破編成の結果
  */
 ipcMain.handle(
-  'search-Organizations',
+  "search-Organizations",
   async (
     event,
     teamCharacters: Character[],
