@@ -55,7 +55,7 @@
     "concurrently": "^7.4.0",
     "cross-env": "^7.0.3",
     "dom-converter": "^0.2.0",
-    "electron": "^23.1.2",
+    "electron": "^23.3.13",
     "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
     "prettier": "^2.7.1",
